@@ -1,0 +1,16 @@
+pub const BroadcastMessages = enum(i16) {
+    cam_switch_pos = 0,
+    cam_switch_num = 1,
+    cam_set_state = 2,
+    replay_set_play_speed = 3,
+    replay_set_play_position = 4,
+    replay_search = 5,
+    replay_set_state = 6,
+    reload_textures = 7,
+    chat_command = 8,
+    pit_command = 9,
+    telem_command = 10,
+    ffb_command = 11,
+    replay_search_session_time = 12,
+    video_capture = 13,
+};
