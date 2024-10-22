@@ -8,6 +8,8 @@ pub fn main() !void {
 
     const address: []const u8 = "google.com";
 
-    const result = try client.check_running(address);
+    const result = try client.isRunning(address);
     std.debug.print("Result is: {}", .{result});
+
+    try client.start();
 }
