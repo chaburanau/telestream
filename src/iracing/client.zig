@@ -2,6 +2,7 @@ const std = @import("std");
 const heap = std.heap;
 const http = std.http;
 const win = std.os.windows;
+const windows = @import("windows.zig");
 
 const IRacingAPIURL = "http://127.0.0.1:32034";
 const StatusEndpoint = "/get_sim_status?object=simStatus";
@@ -45,6 +46,12 @@ const ValueHeader = extern struct {
     _unit: [32]c_char,
 };
 
+const Tick = extern struct {
+    number: i32,
+    buffer: []u8,
+    values: []ValueHeader,
+};
+
 pub fn isRunning(url: ?[]const u8) !bool {
     var gpa = heap.GeneralPurposeAllocator(.{}){};
     defer std.debug.assert(gpa.deinit() == .ok);
@@ -67,7 +74,7 @@ pub fn isRunning(url: ?[]const u8) !bool {
     try request.finish();
     try request.wait();
 
-    const body = try request.reader().readAllAlloc(allocator, 8192);
+    const body = try request.reader().readAllAlloc(allocator, 256);
     defer allocator.free(body);
 
     return std.mem.indexOf(u8, body, "running:1") != null;
@@ -76,110 +83,26 @@ pub fn isRunning(url: ?[]const u8) !bool {
 pub fn start() !void {
     if (!try isRunning(null)) return SimError.SimNotRunning;
 
-    var gpa = heap.GeneralPurposeAllocator(.{}){};
-    defer std.debug.assert(gpa.deinit() == .ok);
-
-    // const allocator = gpa.allocator();
     const handle_name = try win.sliceToPrefixedFileW(null, IRacingTelemetryFileName);
 
-    const handle = try WinOpenFileMappingW(FILE_MAP_READ, 0, handle_name.span().ptr);
+    const handle = try windows.WinOpenFileMappingW(windows.FILE_MAP_READ, 0, handle_name.span().ptr);
     defer win.CloseHandle(handle);
 
-    const location = try WinMapViewOfFile(handle, FILE_MAP_READ, 0, 0, 0);
-    defer WinUnmapViewOfFile(location) catch |err| std.debug.print("unmap view of file error: {any}", .{err});
+    const location = try windows.WinMapViewOfFile(handle, windows.FILE_MAP_READ, 0, 0, 0);
+    defer windows.WinUnmapViewOfFile(location) catch |err| std.debug.print("unmap view of file error: {any}", .{err});
 
-    const memory = @as([*]u8, @ptrCast(@alignCast(location)))[0..@sizeOf(Header)];
-    const data = std.mem.bytesAsSlice(Header, memory);
-    std.debug.print("\nMemory: {any}", .{memory});
-    std.debug.print("\nData: {any}", .{data});
+    const events = try win.CreateEventEx(null, IRacingDataEventFileName, win.CREATE_EVENT_MANUAL_RESET, windows.FILE_MAP_READ);
+    defer win.CloseHandle(events);
+
+    const header_memory = @as([*]u8, @ptrCast(@alignCast(location)))[0..@sizeOf(Header)];
+    const header: Header = std.mem.bytesAsValue(Header, header_memory).*;
+
+    const beginning: usize = @intCast(header.session_info_offset);
+    const ending: usize = @intCast(header.session_info_offset + header.session_info_lenght);
+
+    const session_memory = @as([*]u8, @ptrCast(@alignCast(location)))[beginning..ending];
+    const session: []u8 = std.mem.bytesAsSlice(u8, session_memory);
+
+    std.debug.print("\nHeader: {any}", .{header});
+    std.debug.print("\nSession: {s}", .{session});
 }
-
-pub fn WinCreateFileMapping(
-    hFile: win.HANDLE,
-    lpFileMappingAttributes: ?*win.SECURITY_ATTRIBUTES,
-    flProtect: win.DWORD,
-    dwMaximumSizeHigh: win.DWORD,
-    dwMaximumSizeLow: win.DWORD,
-    lpName: ?win.LPCSTR,
-) !win.HANDLE {
-    const handle = CreateFileMappingA(hFile, lpFileMappingAttributes, flProtect, dwMaximumSizeHigh, dwMaximumSizeLow, lpName);
-    if (handle) |h| {
-        return h;
-    } else {
-        switch (win.kernel32.GetLastError()) {
-            else => |err| return win.unexpectedError(err),
-        }
-    }
-}
-
-pub fn WinMapViewOfFile(
-    hFileMappingObject: win.HANDLE,
-    dwDesiredAccess: win.DWORD,
-    dwFileOffsetHigh: win.DWORD,
-    dwFileOffsetLow: win.DWORD,
-    dwNumberOfBytesToMap: win.SIZE_T,
-) !win.LPVOID {
-    const address = MapViewOfFile(hFileMappingObject, dwDesiredAccess, dwFileOffsetHigh, dwFileOffsetLow, dwNumberOfBytesToMap);
-    if (address) |addr| {
-        return addr;
-    } else {
-        switch (win.kernel32.GetLastError()) {
-            else => |err| return win.unexpectedError(err),
-        }
-    }
-}
-
-pub fn WinUnmapViewOfFile(
-    lpBaseAddress: win.LPCVOID,
-) !void {
-    if (UnmapViewOfFile(lpBaseAddress) == 0) {
-        switch (win.kernel32.GetLastError()) {
-            else => |err| return win.unexpectedError(err),
-        }
-    }
-}
-
-pub fn WinOpenFileMappingW(
-    dwDesiredAccess: win.DWORD,
-    bInheritHandle: win.BOOL,
-    lpName: win.LPCWSTR,
-) !win.HANDLE {
-    const handle = OpenFileMappingW(dwDesiredAccess, bInheritHandle, lpName);
-    if (handle) |h| {
-        return h;
-    } else {
-        switch (win.kernel32.GetLastError()) {
-            else => |err| return win.unexpectedError(err),
-        }
-    }
-}
-
-pub const FILE_MAP_READ = 0x0002;
-pub const FILE_MAP_WRITE = 0x0004;
-
-pub extern "kernel32" fn CreateFileMappingA(
-    hFile: win.HANDLE,
-    lpFileMappingAttributes: ?*win.SECURITY_ATTRIBUTES,
-    flProtect: win.DWORD,
-    dwMaximumSizeHigh: win.DWORD,
-    dwMaximumSizeLow: win.DWORD,
-    lpName: ?win.LPCSTR,
-) callconv(win.WINAPI) ?win.HANDLE;
-
-pub extern "kernel32" fn MapViewOfFile(
-    hFileMappingObject: win.HANDLE,
-    dwDesiredAccess: win.DWORD,
-    dwFileOffsetHigh: win.DWORD,
-    dwFileOffsetLow: win.DWORD,
-    dwNumberOfBytesToMap: win.SIZE_T,
-) callconv(win.WINAPI) ?win.LPVOID;
-
-pub extern "kernel32" fn UnmapViewOfFile(
-    lpBaseAddress: win.LPCVOID,
-) callconv(win.WINAPI) win.BOOL;
-
-pub extern "kernel32" fn OpenFileMappingW(
-    dwDesiredAccess: win.DWORD,
-    bInheritHandle: win.BOOL,
-    lpName: win.LPCWSTR,
-) callconv(win.WINAPI) ?win.HANDLE;
