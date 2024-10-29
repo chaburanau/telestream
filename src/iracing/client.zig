@@ -3,6 +3,7 @@ const heap = std.heap;
 const http = std.http;
 const win = std.os.windows;
 const windows = @import("windows.zig");
+const headers = @import("header.zig");
 
 const IRacingAPIURL = "http://127.0.0.1:32034";
 const StatusEndpoint = "/get_sim_status?object=simStatus";
@@ -11,45 +12,6 @@ const IRacingDataEventFileName = "Local\\IRSDKDataValidEvent";
 
 const SimError = error{
     SimNotRunning,
-};
-
-const Header = extern struct {
-    version: i32,
-    status: i32,
-    tick_rate: i32,
-    session_info_version: i32,
-    session_info_lenght: i32,
-    session_info_offset: i32,
-    n_vars: i32,
-    header_offset: i32,
-    n_buffers: i32,
-    buffer_length: i32,
-    padding: [2]u32,
-    buffers: [4]ValueBuffer,
-};
-
-const ValueBuffer = extern struct {
-    ticks: i32,
-    offset: i32,
-    padding: [2]u32,
-};
-
-const ValueHeader = extern struct {
-    value_type: i32,
-    offset: i32,
-    count: i32,
-    count_as_time: bool,
-
-    _pad: [3]u8,
-    _name: [32]c_char,
-    _desc: [64]c_char,
-    _unit: [32]c_char,
-};
-
-const Tick = extern struct {
-    number: i32,
-    buffer: []u8,
-    values: []ValueHeader,
 };
 
 pub fn isRunning(url: ?[]const u8) !bool {
@@ -84,7 +46,6 @@ pub fn start() !void {
     if (!try isRunning(null)) return SimError.SimNotRunning;
 
     const handle_name = try win.sliceToPrefixedFileW(null, IRacingTelemetryFileName);
-
     const handle = try windows.WinOpenFileMappingW(windows.FILE_MAP_READ, 0, handle_name.span().ptr);
     defer win.CloseHandle(handle);
 
@@ -94,15 +55,82 @@ pub fn start() !void {
     const events = try win.CreateEventEx(null, IRacingDataEventFileName, win.CREATE_EVENT_MANUAL_RESET, windows.FILE_MAP_READ);
     defer win.CloseHandle(events);
 
-    const header_memory = @as([*]u8, @ptrCast(@alignCast(location)))[0..@sizeOf(Header)];
-    const header: Header = std.mem.bytesAsValue(Header, header_memory).*;
+    const header_memory = @as([*]u8, @ptrCast(@alignCast(location)))[0..@sizeOf(headers.Header)];
+    const header: headers.Header = std.mem.bytesAsValue(headers.Header, header_memory).*;
 
-    const beginning: usize = @intCast(header.session_info_offset);
-    const ending: usize = @intCast(header.session_info_offset + header.session_info_lenght);
+    // const beginning: usize = @intCast(header.session_info_offset);
+    // const ending: usize = @intCast(header.session_info_offset + header.session_info_lenght);
 
-    const session_memory = @as([*]u8, @ptrCast(@alignCast(location)))[beginning..ending];
-    const session: []u8 = std.mem.bytesAsSlice(u8, session_memory);
+    // const session_memory = @as([*]u8, @ptrCast(@alignCast(location)))[beginning..ending];
+    // const session: []u8 = std.mem.bytesAsSlice(u8, session_memory);
 
     std.debug.print("\nHeader: {any}", .{header});
-    std.debug.print("\nSession: {s}", .{session});
+    // std.debug.print("\nSession: {s}", .{session});
 }
+
+pub const Client = struct {
+    location: *anyopaque,
+    handle: win.HANDLE,
+    events: win.HANDLE,
+
+    pub fn init() !Client {
+        const handle_name = try win.sliceToPrefixedFileW(null, IRacingTelemetryFileName);
+        const handle = try windows.WinOpenFileMappingW(windows.FILE_MAP_READ, 0, handle_name.span().ptr);
+        const location = try windows.WinMapViewOfFile(handle, windows.FILE_MAP_READ, 0, 0, 0);
+        const events = try win.CreateEventEx(null, IRacingDataEventFileName, win.CREATE_EVENT_MANUAL_RESET, windows.FILE_MAP_READ);
+
+        const client = Client{
+            .location = location,
+            .handle = handle,
+            .events = events,
+        };
+
+        return client;
+    }
+
+    pub fn deinit(self: Client) !void {
+        windows.UnmapViewOfFile(self.location);
+        win.CloseHandle(self.handle);
+        win.CloseHandle(self.events);
+    }
+
+    pub fn read(self: Client, from: usize, until: usize) []u8 {
+        const memory = @as([*]u8, @ptrCast(@alignCast(self.location)))[from..until];
+        return memory;
+    }
+
+    pub fn readHeader(self: Client) headers.Header {
+        const memory = self.read(0, @sizeOf(headers.Header));
+        const header: headers.Header = std.mem.bytesAsValue(headers.Header, memory).*;
+
+        return header;
+    }
+
+    pub fn readSessionDetails(self: Client, header: headers.Header) []u8 {
+        const from: usize = @intCast(header.session_info_offset);
+        const until: usize = @intCast(header.session_info_offset + header.session_info_lenght);
+
+        const memory = self.read(from, until);
+        const session: []u8 = std.mem.bytesAsSlice(u8, memory);
+
+        return session;
+    }
+
+    pub fn readValueHeaders(self: Client, header: headers.Header, allocator: std.mem.Allocator) !headers.ValueHeaders {
+        const n_vars: usize = @intCast(header.n_vars);
+        const size: usize = @sizeOf(headers.ValueHeader);
+        const from: usize = @intCast(header.header_offset);
+        const until: usize = @intCast(from + size * n_vars);
+
+        const memory = self.read(from, until);
+        var values = try headers.ValueHeaders.initCapacity(allocator, size);
+
+        for (0..n_vars) |index| {
+            const chunk = memory[index * size .. (index + 1) * size];
+            const value: headers.ValueHeader = std.mem.bytesAsValue(headers.ValueHeader, chunk).*;
+            try values.append(value);
+        }
+
+        return values;
+    }
+};

@@ -1,13 +1,22 @@
 const std = @import("std");
-const warnings = @import("iracing/warnings.zig");
-const client = @import("iracing/client.zig");
+const iclient = @import("iracing/client.zig");
 
 pub fn main() !void {
-    const warn: warnings.EngineWarning = .engine_stalled;
-    std.debug.print("Warning is: {}", .{warn});
+    var gpa = std.heap.GeneralPurposeAllocator(.{}){};
+    defer std.debug.assert(gpa.deinit() == .ok);
 
-    const result = try client.isRunning(null);
-    std.debug.print("Result is: {}", .{result});
+    const allocator = gpa.allocator();
+    const client = try iclient.Client.init();
 
-    try client.start();
+    const header = client.readHeader();
+    const vars = try client.readValueHeaders(header, allocator);
+    defer vars.deinit();
+
+    std.debug.print("\n\n\n Header: {any}", .{header});
+    std.debug.print("\n\n\n Value Headers count: {any}", .{vars.items.len});
+    std.debug.print("\n\n\n", .{});
+
+    for (vars.items) |variable| {
+        std.debug.print("Name: {s}; Desc: {s}; Unit: {s};\n", .{ variable._name, variable._desc, variable._unit });
+    }
 }
