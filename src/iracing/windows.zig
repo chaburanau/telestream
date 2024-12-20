@@ -31,7 +31,7 @@ pub extern "kernel32" fn OpenFileMappingW(
     lpName: win.LPCWSTR,
 ) callconv(win.WINAPI) ?win.HANDLE;
 
-pub fn WinCreateFileMapping(
+pub fn createFileMapping(
     hFile: win.HANDLE,
     lpFileMappingAttributes: ?*win.SECURITY_ATTRIBUTES,
     flProtect: win.DWORD,
@@ -49,7 +49,7 @@ pub fn WinCreateFileMapping(
     }
 }
 
-pub fn WinMapViewOfFile(
+pub fn mapViewOfFile(
     hFileMappingObject: win.HANDLE,
     dwDesiredAccess: win.DWORD,
     dwFileOffsetHigh: win.DWORD,
@@ -66,7 +66,7 @@ pub fn WinMapViewOfFile(
     }
 }
 
-pub fn WinUnmapViewOfFile(
+pub fn unmapViewOfFile(
     lpBaseAddress: win.LPCVOID,
 ) !void {
     if (UnmapViewOfFile(lpBaseAddress) == 0) {
@@ -76,7 +76,7 @@ pub fn WinUnmapViewOfFile(
     }
 }
 
-pub fn WinOpenFileMappingW(
+pub fn openFileMappingW(
     dwDesiredAccess: win.DWORD,
     bInheritHandle: win.BOOL,
     lpName: win.LPCWSTR,

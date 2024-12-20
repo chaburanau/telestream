@@ -1,4 +1,3 @@
-
 build:
 	@ echo "-> Building binary..."
 	@ zig build
