@@ -7,12 +7,12 @@ pub const Source = struct {
     memory: ?MemorySource = null,
     file: ?FileSource = null,
 
-    pub fn fromMemory(path: []u8) !Source {
+    pub fn fromMemory(path: []const u8) !Source {
         const source = try MemorySource.init(path);
         return Source{ .memory = source };
     }
 
-    pub fn fromFile(path: []u8) !Source {
+    pub fn fromFile(path: []const u8) !Source {
         const source = try FileSource.init(path);
         return Source{ .file = source };
     }
@@ -40,7 +40,7 @@ const MemorySource = struct {
     handle: win.HANDLE,
     location: *anyopaque,
 
-    fn init(path: []u8) MemorySource {
+    fn init(path: []const u8) !MemorySource {
         const handle_name = try win.sliceToPrefixedFileW(null, path);
         const handle = try windows.openFileMappingW(windows.FILE_MAP_READ, 0, handle_name.span().ptr);
         const location = try windows.mapViewOfFile(handle, windows.FILE_MAP_READ, 0, 0, 0);
@@ -65,14 +65,14 @@ const MemorySource = struct {
 const FileSource = struct {
     file: std.fs.File,
 
-    fn init(path: []u8) !FileSource {
+    fn init(path: []const u8) !FileSource {
         const file = try std.fs.cwd().openFile(path, .{});
         return FileSource{ .file = file };
     }
 
     fn read(self: FileSource, offset: usize, buffer: []u8) !void {
         try self.file.seekTo(offset);
-        try self.file.read(buffer);
+        _ = try self.file.read(buffer);
     }
 
     fn deinit(self: FileSource) void {

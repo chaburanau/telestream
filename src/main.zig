@@ -1,5 +1,10 @@
 const std = @import("std");
 const iclient = @import("iracing/client.zig");
+const controller = @import("iracing/controller.zig");
+const source = @import("iracing/source.zig");
+const event_loop = @import("iracing/event.zig");
+const header = @import("iracing/header.zig");
+const mapper = @import("iracing/mapper.zig");
 
 const IRacingAPIURL = "http://127.0.0.1:32034";
 const IRacingTelemetryFileName = "Local\\IRSDKMemMapFileName";
@@ -10,33 +15,23 @@ pub fn main() !void {
     defer std.debug.assert(gpa.deinit() == .ok);
 
     const allocator = gpa.allocator();
-    const client = try iclient.Client.init(allocator, IRacingTelemetryFileName, IRacingDataEventFileName);
 
-    const header = try client.readHeader();
-    const vars = try client.readValueHeaders(header, allocator);
-    defer vars.deinit();
+    const src = try source.Source.fromMemory(IRacingTelemetryFileName);
 
-    std.debug.print("\n\n\n Header: {any}", .{header});
-    std.debug.print("\n\n\n Value Headers count: {any}", .{vars.items.len});
-    std.debug.print("\n\n\n", .{});
-
-    var count: i32 = 0;
-
-    for (vars.items) |variable| {
-        count += variable.count;
-        std.debug.print("Name: {s}; Desc: {s}; Unit: {s}; Count: {d}; Value Type: {d}\n", .{
-            variable._name,
-            variable._desc,
-            variable._unit,
-            variable.count,
-            variable.value_type,
-        });
-    }
-
-    std.debug.print("Count: {d}", .{count});
-
-    const data = try allocator.alloc(u8, @intCast(header.buffer_length));
+    const size = @sizeOf(header.Header);
+    const data = try allocator.alloc(u8, size);
     defer allocator.free(data);
 
-    client.read(@intCast(header.buffers[0].offset), data);
+    try src.read(0, data);
+    const head = try mapper.mapStruct(header.Header, data);
+
+    std.debug.print("\n\n\n Header: {any}", .{head});
+    std.debug.print("\n\n\n", .{});
+
+    const loop = try event_loop.EventLoop.fromWindowsEventFile(IRacingDataEventFileName);
+
+    for (0..1000) |index| {
+        std.debug.print("\n{d} : {d}", .{index, std.time.timestamp()});
+        try loop.wait(10000000);
+    }
 }

@@ -31,6 +31,12 @@ pub extern "kernel32" fn OpenFileMappingW(
     lpName: win.LPCWSTR,
 ) callconv(win.WINAPI) ?win.HANDLE;
 
+pub extern "kernel32" fn OpenEventA(
+    dwDesiredAccess: win.DWORD,
+    bInheritHandle: win.BOOL,
+    lpName: win.LPCSTR,
+) callconv(win.WINAPI) ?win.HANDLE;
+
 pub fn createFileMapping(
     hFile: win.HANDLE,
     lpFileMappingAttributes: ?*win.SECURITY_ATTRIBUTES,
@@ -82,6 +88,21 @@ pub fn openFileMappingW(
     lpName: win.LPCWSTR,
 ) !win.HANDLE {
     const handle = OpenFileMappingW(dwDesiredAccess, bInheritHandle, lpName);
+    if (handle) |h| {
+        return h;
+    } else {
+        switch (win.kernel32.GetLastError()) {
+            else => |err| return win.unexpectedError(err),
+        }
+    }
+}
+
+pub fn openEventA(
+    dwDesiredAccess: win.DWORD,
+    bInheritHandle: win.BOOL,
+    lpName: win.LPCSTR,
+) !win.HANDLE {
+    const handle = OpenEventA(dwDesiredAccess, bInheritHandle, lpName);
     if (handle) |h| {
         return h;
     } else {
