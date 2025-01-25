@@ -88,4 +88,12 @@ pub fn build(b: *std.Build) void {
     const test_step = b.step("test", "Run unit tests");
     test_step.dependOn(&run_lib_unit_tests.step);
     test_step.dependOn(&run_exe_unit_tests.step);
+
+    const yaml = b.dependency("zig-yaml", .{
+        .target = target,
+        .optimize = optimize,
+      });
+
+    exe.root_module.addImport("yaml", yaml.module("yaml"));
+    lib.root_module.addImport("yaml", yaml.module("yaml"));
 }

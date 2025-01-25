@@ -57,7 +57,7 @@ const MemorySource = struct {
     }
 
     fn deinit(self: MemorySource) !void {
-        windows.unmapViewOfFile(self.location);
+        try windows.unmapViewOfFile(self.location);
         win.CloseHandle(self.handle);
     }
 };
