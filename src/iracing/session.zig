@@ -27,10 +27,8 @@ pub const SessionInfo = struct {
         var split = std.mem.splitScalar(u8, path, '.');
         var current = self.session_info.docs.items[0];
         while (split.next()) |item| {
-            std.debug.print("item: {s}\n", .{item});
             switch (current) {
                 .map => {
-                    std.debug.print("keys: {s}\n", .{current.map.keys()});
                     if (current.map.get(item)) |next| {
                         current = next;
                     } else {

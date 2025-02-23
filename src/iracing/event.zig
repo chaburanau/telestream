@@ -1,5 +1,4 @@
 const std = @import("std");
-const win = std.os.windows;
 const windows = @import("windows.zig");
 
 pub const EventLoop = struct {
@@ -24,20 +23,19 @@ pub const EventLoop = struct {
 };
 
 const WindowsEventLoop = struct {
-    events: win.HANDLE,
+    events: std.os.windows.HANDLE,
 
     fn init(event_file: []const u8) !WindowsEventLoop {
-        // const handle_name = try win.sliceToPrefixedFileW(null, event_file);
         const handle_name: [:0]const u8 = @ptrCast(event_file);
         const handle = try windows.openEventA(0x00100000, 0, handle_name.ptr);
         return WindowsEventLoop{ .events = handle };
     }
 
     fn deinit(self: WindowsEventLoop) !void {
-        win.CloseHandle(self.events);
+        std.os.windows.CloseHandle(self.events);
     }
 
     fn wait(self: WindowsEventLoop, duration: u32) !void {
-        try win.WaitForSingleObject(self.events, duration);
+        try std.os.windows.WaitForSingleObject(self.events, duration);
     }
 };

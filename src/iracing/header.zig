@@ -21,7 +21,6 @@ pub const ValueBuffer = extern struct {
     padding: [2]u32,
 };
 
-pub const ValueHeaders = std.ArrayList(ValueHeader);
 pub const ValueHeader = extern struct {
     value_type: i32,
     offset: i32,

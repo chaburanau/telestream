@@ -11,17 +11,14 @@ pub fn mapStruct(comptime T: type, data: []const u8) !T {
     return std.mem.bytesAsValue(T, data).*;
 }
 
-pub fn mapArray(comptime T: type, allocator: std.mem.Allocator, data: []const u8, count: usize) !std.ArrayList(T) {
-    var array = std.ArrayList(T).initCapacity(allocator, count);
+pub fn mapArray(comptime T: type, array: std.ArrayList(T), data: []const u8, count: usize) !void {
     const size = @sizeOf(T);
 
     for (0..count) |index| {
         const chunk = data[index * size .. (index + 1) * size];
-        const value = mapStruct(T, chunk);
-        try array.append(value);
+        const value = try mapStruct(T, chunk);
+        array.items[index] = value;
     }
-
-    return array;
 }
 
 test "map header" {
