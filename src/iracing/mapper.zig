@@ -11,7 +11,7 @@ pub fn mapStruct(comptime T: type, data: []const u8) !T {
     return std.mem.bytesAsValue(T, data).*;
 }
 
-pub fn mapArray(comptime T: type, array: std.ArrayList(T), data: []const u8, count: usize) !void {
+pub fn mapArray(comptime T: type, array: *std.ArrayList(T), data: []const u8, count: usize) !void {
     const size = @sizeOf(T);
 
     for (0..count) |index| {

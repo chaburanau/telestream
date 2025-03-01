@@ -19,6 +19,10 @@ pub const ValueBuffer = extern struct {
     ticks: i32,
     offset: i32,
     padding: [2]u32,
+
+    pub fn less(_: void, left: ValueBuffer, right: ValueBuffer) bool {
+        return left.ticks < right.ticks;
+    }
 };
 
 pub const ValueHeader = extern struct {

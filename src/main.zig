@@ -25,7 +25,7 @@ pub fn main() !void {
 
     var updater = Updater{};
     updater.count = 0;
-    try ctrl.start(&updater);
+    try ctrl.run(&updater);
 }
 
 const Updater = struct {

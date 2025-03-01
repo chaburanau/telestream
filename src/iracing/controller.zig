@@ -8,6 +8,7 @@ const session = @import("session.zig");
 
 const HEADER_SIZE = @sizeOf(header.Header);
 const VARIABLE_SIZE = @sizeOf(header.ValueHeader);
+const TIMEOUT: u32 = 10000;
 
 pub const Controller = struct {
     allocator: std.mem.Allocator,
@@ -15,59 +16,60 @@ pub const Controller = struct {
     source: source.Source,
     events: events.EventLoop,
 
-    last_header_data: [HEADER_SIZE]u8,
-    last_header: header.Header,
+    header: header.Header,
+    header_data: [HEADER_SIZE]u8,
 
-    variables_header_data: std.ArrayList(u8),
-    variables_header: ?std.ArrayList(header.ValueHeader) = null,
+    session_info: ?session.SessionInfo,
+    session_info_data: std.ArrayList(u8),
 
-    last_session_info_version: u64 = 0,
-    last_session_info_offset: usize = 0,
-    last_session_info_data: std.ArrayList(u8),
-    last_session_info: ?session.SessionInfo = null,
+    variables_headers: std.ArrayList(header.ValueHeader),
+    variables_headers_data: std.ArrayList(u8),
 
-    last_variables_version: u64 = 0,
-    last_variables_offset: usize = 0,
-    last_variables_data: std.ArrayList(u8),
-    last_variables: ?std.ArrayList(header.Variable) = null,
+    variables_values: std.ArrayList(header.Variable),
+    variables_values_data: std.ArrayList(u8),
+
+    session_info_version: u64 = 0,
+    variables_values_version: u64 = 0,
 
     pub fn init(allocator: std.mem.Allocator, src: source.Source, evt: events.EventLoop) !Controller {
         return Controller{
             .allocator = allocator,
             .source = src,
             .events = evt,
-            .last_header_data = std.mem.zeroes([HEADER_SIZE]u8),
-            .last_header = std.mem.zeroes(header.Header),
-            .variables_header_data = std.ArrayList(u8).init(allocator),
-            .variables_header = std.ArrayList(header.ValueHeader).init(allocator),
-            .last_session_info_data = std.ArrayList(u8).init(allocator),
-            .last_variables_data = std.ArrayList(u8).init(allocator),
-            .last_variables = std.ArrayList(header.Variable).init(allocator),
+            .header = std.mem.zeroes(header.Header),
+            .header_data = std.mem.zeroes([HEADER_SIZE]u8),
+            .session_info = null,
+            .session_info_data = std.ArrayList(u8).init(allocator),
+            .variables_headers = std.ArrayList(header.ValueHeader).init(allocator),
+            .variables_headers_data = std.ArrayList(u8).init(allocator),
+            .variables_values = std.ArrayList(header.Variable).init(allocator),
+            .variables_values_data = std.ArrayList(u8).init(allocator),
         };
     }
 
     pub fn deinit(self: *Controller) void {
-        self.variables_header_data.deinit();
-        self.last_session_info_data.deinit();
-        self.last_variables_data.deinit();
-        if (self.variables_header) |*head| head.deinit();
-        if (self.last_session_info) |*info| info.deinit();
-        if (self.last_variables) |*vars| vars.deinit();
+        self.variables_values_data.deinit();
+        self.variables_headers_data.deinit();
+        self.session_info_data.deinit();
+
+        self.variables_values.deinit();
+        self.variables_headers.deinit();
+        if (self.session_info) |*info| info.deinit();
     }
 
-    pub fn start(self: *Controller, updater: anytype) !void {
+    pub fn run(self: *Controller, updater: anytype) !void {
         while (true) {
-            try self.events.wait(10000);
+            try self.events.wait(TIMEOUT);
             try self.readHeader();
             try self.readSession();
-            try self.readVariablesHeader();
-            try self.readVariables();
+            try self.readVariablesHeaders();
+            try self.readVariablesValues();
 
             const close = try updater.update(
-                self.last_header,
-                self.last_session_info.?,
-                self.variables_header.?,
-                self.last_variables.?,
+                self.header,
+                self.session_info.?,
+                self.variables_headers,
+                self.variables_values,
             );
 
             if (close) return;
@@ -75,55 +77,56 @@ pub const Controller = struct {
     }
 
     fn readHeader(self: *Controller) !void {
-        try self.source.read(0, &self.last_header_data);
-        self.last_header = try mapper.mapStruct(header.Header, &self.last_header_data);
+        try self.source.read(0, &self.header_data);
+        self.header = try mapper.mapStruct(header.Header, &self.header_data);
     }
 
     fn readSession(self: *Controller) !void {
-        if (self.last_header.session_info_version <= self.last_session_info_version) return;
+        if (self.header.session_info_version <= self.session_info_version) return;
 
-        self.last_session_info_version = @intCast(self.last_header.session_info_version);
-        self.last_session_info_offset = @intCast(self.last_header.session_info_offset);
+        self.session_info_version = @intCast(self.header.session_info_version);
+        const offset: usize = @intCast(self.header.session_info_offset);
+        const size: usize = @intCast(self.header.session_info_lenght);
 
-        try Controller.resize(u8, &self.last_session_info_data, 0, @intCast(self.last_header.session_info_lenght));
-        try self.source.read(self.last_session_info_offset, self.last_session_info_data.items);
+        try self.session_info_data.resize(size);
+        try self.source.read(offset, self.session_info_data.items);
 
-        if (self.last_session_info) |*info| info.deinit();
-        self.last_session_info = try session.SessionInfo.init(self.allocator, self.last_session_info_data.items);
+        if (self.session_info) |*info| info.deinit();
+        self.session_info = try session.SessionInfo.init(self.allocator, self.session_info_data.items);
     }
 
-    fn readVariablesHeader(self: *Controller) !void {
-        if (self.variables_header.?.items.len > 0) return;
+    fn readVariablesHeaders(self: *Controller) !void {
+        if (self.variables_headers.items.len > 0) return;
 
-        const count: usize = @intCast(self.last_header.n_vars);
+        const offset: usize = @intCast(self.header.header_offset);
+        const count: usize = @intCast(self.header.n_vars);
         const size: usize = @intCast(count * VARIABLE_SIZE);
-        const offset: usize = @intCast(self.last_header.header_offset);
 
-        try Controller.resize(u8, &self.variables_header_data, 0, size);
-        try Controller.resize(header.ValueHeader, &self.variables_header.?, std.mem.zeroes(header.ValueHeader), count);
-        try self.source.read(offset, self.variables_header_data.items);
-        for (0..count) |index| {
-            const chunk = self.variables_header_data.items[index * VARIABLE_SIZE .. (index + 1) * VARIABLE_SIZE];
-            const value = try mapper.mapStruct(header.ValueHeader, chunk);
-            self.variables_header.?.items[index] = value;
-        }
+        try self.variables_headers.resize(count);
+        try self.variables_headers_data.resize(size);
+        try self.source.read(offset, self.variables_headers_data.items);
+        try mapper.mapArray(header.ValueHeader, &self.variables_headers, self.variables_headers_data.items, count);
     }
 
-    fn readVariables(self: *Controller) !void {
-        if (!self.readyForVariablesUpdate()) return;
+    fn readVariablesValues(self: *Controller) !void {
+        const tick = self.getLastTick();
+        if (tick.ticks <= self.variables_values_version) return;
 
-        const count: usize = @intCast(self.variables_header.?.items.len);
+        self.variables_values_version = @intCast(tick.ticks);
+        const offset: usize = @intCast(tick.offset);
+        const count: usize = @intCast(self.header.n_vars);
         const size: usize = self.variablesTotalSize();
 
-        try Controller.resize(u8, &self.last_variables_data, 0, size);
-        try Controller.resize(header.Variable, &self.last_variables.?, header.Variable{}, count);
-        try self.source.read(self.last_variables_offset, self.last_variables_data.items);
+        try self.variables_values.resize(count);
+        try self.variables_values_data.resize(size);
+        try self.source.read(offset, self.variables_values_data.items);
         for (0..count) |index| {
-            const head = self.variables_header.?.items[index];
-            const offset: usize = @intCast(head.offset);
-            const chunk = self.last_variables_data.items[offset .. offset + head.size()];
+            const head = self.variables_headers.items[index];
+            const start: usize = @intCast(head.offset);
+            const end: usize = start + head.size();
+            const chunk = self.variables_values_data.items[start..end];
             const value = try header.Value.init(self.allocator, head, chunk);
-            self.last_variables.?.items[index] = header.Variable{
+            self.variables_values.items[index] = header.Variable{
                 .name = head._name,
                 .unit = head._unit,
                 .value = value,
@@ -131,46 +134,25 @@ pub const Controller = struct {
         }
     }
 
-    fn readyForVariablesUpdate(self: *Controller) bool {
-        var last_version: usize = 0;
-        var last_offset: usize = 0;
-        var before_last_version: usize = 0;
-        var before_last_offset: usize = 0;
-
-        for (self.last_header.buffers) |buffer| {
-            if (buffer.ticks > last_version) {
-                before_last_version = last_version;
-                before_last_offset = last_offset;
-                last_version = @intCast(buffer.ticks);
-                last_offset = @intCast(buffer.offset);
-            }
-        }
-
-        if (before_last_version > self.last_variables_version) {
-            self.last_variables_version = before_last_version;
-            self.last_variables_offset = before_last_offset;
-            return true;
-        }
-
-        return false;
+    fn getLastTick(self: *Controller) header.ValueBuffer {
+        std.mem.sort(header.ValueBuffer, &self.header.buffers, {}, header.ValueBuffer.less);
+        return self.header.buffers[1];
     }
 
     fn variablesTotalSize(self: *Controller) usize {
-        var last: header.ValueHeader = self.variables_header.?.items[0];
+        var last: usize = 0;
 
-        for (self.variables_header.?.items[1..]) |variable| {
-            if (variable.offset > last.offset) {
-                last = variable;
+        for (1..self.variables_headers.items.len) |index| {
+            const current_header = self.variables_headers.items[index];
+            const last_header = self.variables_headers.items[last];
+
+            if (current_header.offset > last_header.offset) {
+                last = index;
             }
         }
 
-        const offset: usize = @intCast(last.offset);
-        return offset + last.size();
-    }
-
-    fn resize(comptime T: type, array: *std.ArrayList(T), default: T, size: usize) !void {
-        if (array.capacity > size) array.shrinkAndFree(size);
-        if (array.capacity < size) try array.ensureTotalCapacity(size);
-        if (array.items.len < size) try array.appendNTimes(default, size - array.items.len);
+        const last_header = self.variables_headers.items[last];
+        const offset: usize = @intCast(last_header.offset);
+        return offset + last_header.size();
     }
 };
