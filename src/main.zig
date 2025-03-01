@@ -3,6 +3,8 @@ const std = @import("std");
 const controller = @import("iracing/controller.zig");
 const source = @import("iracing/source.zig");
 const events = @import("iracing/event.zig");
+const header = @import("iracing/header.zig");
+const session = @import("iracing/session.zig");
 
 const IRacingAPIURL = "http://127.0.0.1:32034";
 const IRacingTelemetryFileName = "Local\\IRSDKMemMapFileName";
@@ -21,19 +23,40 @@ pub fn main() !void {
     var ctrl = try controller.Controller.init(allocator, src, loop);
     defer ctrl.deinit();
 
-    const head = try ctrl.getHeader();
-    std.debug.print("Header: {any}", .{head});
-
-    const session_info = try ctrl.getSessionInfo();
-    for (session_info.keys()) |key| {
-        std.debug.print("{s}\n", .{key});
-    }
-
-    const vars = try ctrl.getVariables();
-    for (vars.items) |variable| {
-        std.debug.print("{s}\n", .{variable._name});
-    }
+    var updater = Updater{};
+    updater.count = 0;
+    try ctrl.start(&updater);
 }
+
+const Updater = struct {
+    count: usize = 0,
+
+    pub fn update(
+        self: *Updater,
+        head: header.Header,
+        sess: session.SessionInfo,
+        vars: std.ArrayList(header.ValueHeader),
+        vals: std.ArrayList(header.Variable),
+    ) !bool {
+        self.count += 1;
+
+        std.debug.print("Header: {any}\n", .{head});
+
+        std.debug.print("\n\n\n\n", .{});
+
+        for (sess.keys()) |key| {
+            std.debug.print("Session key: {s}\n", .{key});
+        }
+
+        std.debug.print("\n\n\n\n", .{});
+
+        for (0..vars.items.len) |index| {
+            std.debug.print("Variable: {s}: {any}\n", .{ vars.items[index]._name, vals.items[index].value });
+        }
+
+        return self.count < 3;
+    }
+};
 
 pub const std_options = std.Options{
     .log_scope_levels = &[_]std.log.ScopeLevel{
