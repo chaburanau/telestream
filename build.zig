@@ -89,11 +89,19 @@ pub fn build(b: *std.Build) void {
     test_step.dependOn(&run_lib_unit_tests.step);
     test_step.dependOn(&run_exe_unit_tests.step);
 
+    const sdl = b.dependency("sdl", .{
+        .target = target,
+        .optimize = optimize,
+        .preferred_link_mode = .static,
+    });
+
     const yaml = b.dependency("zig-yaml", .{
         .target = target,
         .optimize = optimize,
-      });
+    });
 
+    exe.root_module.linkLibrary(sdl.artifact("SDL3"));
+    lib.root_module.linkLibrary(sdl.artifact("SDL3"));
     exe.root_module.addImport("yaml", yaml.module("yaml"));
     lib.root_module.addImport("yaml", yaml.module("yaml"));
 }

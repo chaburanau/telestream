@@ -31,6 +31,10 @@
             .url = "https://github.com/kubkon/zig-yaml/archive/refs/tags/0.0.1.tar.gz",
             .hash = "1220fbd48b78d55097fbdee3308759dfa7ed9fdd6d3995b7fa04d4a9e790bf7d8cf1",
         },
+        .sdl = .{
+            .url = "git+https://github.com/castholm/SDL.git#5179baa2e5154acb229cd4b40c8689498d055691",
+            .hash = "1220655e63d759a534c28ce8ee47f40b2439ba95b6db9fc910c379b1aea294951c55",
+        },
     },
     .paths = .{
         "build.zig",
