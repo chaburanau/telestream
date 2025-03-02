@@ -12,7 +12,9 @@ const IRacingTelemetryFileName = "Local\\IRSDKMemMapFileName";
 const IRacingDataEventFileName = "Local\\IRSDKDataValidEvent";
 
 pub fn main() !void {
-    try overlay.run();
+    var renderer = overlay.Renderer.init();
+    defer renderer.stop();
+    try renderer.start();
     // var gpa = std.heap.GeneralPurposeAllocator(.{}){};
     // defer std.debug.assert(gpa.deinit() == .ok);
     //
