@@ -12,42 +12,41 @@ const IRacingTelemetryFileName = "Local\\IRSDKMemMapFileName";
 const IRacingDataEventFileName = "Local\\IRSDKDataValidEvent";
 
 pub fn main() !void {
-    var renderer = overlay.Renderer.init();
-    defer renderer.stop();
-    try renderer.start();
-    // var gpa = std.heap.GeneralPurposeAllocator(.{}){};
-    // defer std.debug.assert(gpa.deinit() == .ok);
-    //
-    // const allocator = gpa.allocator();
-    //
-    // const src = try source.Source.fromMemory(IRacingTelemetryFileName);
-    // defer src.deinit() catch {};
-    // const loop = try events.EventLoop.fromWindowsEventFile(IRacingDataEventFileName);
-    // defer loop.deinit() catch {};
-    // var ctrl = try controller.Controller.init(allocator, src, loop);
-    // defer ctrl.deinit();
-    //
-    // var updater = Updater{};
-    // updater.count = 0;
-    // try ctrl.run(&updater);
+    // var renderer = overlay.Renderer.init();
+    // defer renderer.stop();
+    // try renderer.start();
+    var gpa = std.heap.GeneralPurposeAllocator(.{}){};
+    defer std.debug.assert(gpa.deinit() == .ok);
+
+    const allocator = gpa.allocator();
+
+    const src = try source.Source.fromMemory(IRacingTelemetryFileName);
+    defer src.deinit() catch {};
+    const loop = try events.EventLoop.fromWindowsEventFile(IRacingDataEventFileName);
+    defer loop.deinit() catch {};
+    var ctrl = try controller.Controller.init(allocator, src, loop);
+    defer ctrl.deinit();
+
+    var updater = Updater{ .allocator = allocator };
+    updater.count = 0;
+    try ctrl.run(&updater);
 }
 
 const Updater = struct {
     count: usize = 0,
+    allocator: std.mem.Allocator,
 
     pub fn update(
         self: *Updater,
         head: header.Header,
         sess: session.SessionInfo,
         vars: std.ArrayList(header.ValueHeader),
-        vals: std.ArrayList(header.Variable),
+        vals: std.ArrayList(header.Value),
     ) !bool {
         self.count += 1;
 
         std.debug.print("Header: {any}\n", .{head});
-
         std.debug.print("\n\n\n\n", .{});
-
         for (sess.keys()) |key| {
             std.debug.print("Session key: {s}\n", .{key});
         }
@@ -55,7 +54,19 @@ const Updater = struct {
         std.debug.print("\n\n\n\n", .{});
 
         for (0..vars.items.len) |index| {
-            std.debug.print("Variable: {s}: {any}\n", .{ vars.items[index]._name, vals.items[index].value });
+            std.debug.print("Name: {s}; Type: {any}; Offset: {d}; Value: {s}\n", .{
+                vars.items[index].name,
+                vars.items[index].value_type,
+                vars.items[index].offset,
+                vals.items[index].data,
+            });
+
+            if (vars.items[index].offset == 207) {
+                const data = try self.allocator.alloc(u8, 256);
+                defer self.allocator.free(data);
+                const idx = try vals.items[index].parse([]i32);
+                std.debug.print("IDs: {any}\n", .{idx});
+            }
         }
 
         return self.count < 3;
