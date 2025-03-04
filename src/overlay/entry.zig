@@ -27,11 +27,6 @@ const Size = struct {
 };
 
 pub const Renderer = struct {
-    SCALE: f32 = 1.0,
-
-    window: ?*c.SDL_Window = null,
-    renderer: ?*c.SDL_Renderer = null,
-
     const NAME = "Overlay";
     const VERSION = "v0.0.1";
     const IDENTIFIER = "com.telestream.overlay";
@@ -49,6 +44,14 @@ pub const Renderer = struct {
         .a = 0,
     };
 
+    scale_x: f32 = 2.0,
+    scale_y: f32 = 2.0,
+    screen_x: u32 = 0,
+    screen_y: u32 = 0,
+
+    window: ?*c.SDL_Window = null,
+    renderer: ?*c.SDL_Renderer = null,
+
     pub fn init() Renderer {
         return Renderer{};
     }
@@ -65,6 +68,7 @@ pub const Renderer = struct {
         try errify(c.SDL_SetWindowKeyboardGrab(self.window, false));
         try errify(c.SDL_SetWindowMouseGrab(self.window, false));
 
+        // Click-through transparency
         const hwnd = c.SDL_GetPointerProperty(c.SDL_GetWindowProperties(self.window), c.SDL_PROP_WINDOW_WIN32_HWND_POINTER, c.NULL).?;
         const casted: std.os.windows.HWND = @ptrCast(hwnd);
         const getLong = windows.GetWindowLongA(casted, c.GWL_EXSTYLE);
@@ -73,6 +77,10 @@ pub const Renderer = struct {
         _ = setLong;
         _ = attribs;
 
+        self.screen_x = @intCast(c.GetSystemMetrics(c.SM_CXSCREEN));
+        self.screen_y = @intCast(c.GetSystemMetrics(c.SM_CYSCREEN));
+
+        std.log.debug("Resolution: {d}x{d}", .{ self.screen_x, self.screen_y });
         std.log.debug("SDL version: {d}.{d}.{d}; Revision: {s}", .{
             c.SDL_MAJOR_VERSION,
             c.SDL_MINOR_VERSION,
@@ -141,6 +149,7 @@ pub const Renderer = struct {
 
     fn reset(self: *Renderer) !void {
         try errify(c.SDL_SetRenderDrawColor(self.renderer, BACKGROUD.r, BACKGROUD.g, BACKGROUD.b, BACKGROUD.a));
+        try errify(c.SDL_SetRenderScale(self.renderer, self.scale_x, self.scale_y));
         try errify(c.SDL_RenderClear(self.renderer));
     }
 
