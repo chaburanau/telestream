@@ -12,24 +12,25 @@ const IRacingTelemetryFileName = "Local\\IRSDKMemMapFileName";
 const IRacingDataEventFileName = "Local\\IRSDKDataValidEvent";
 
 pub fn main() !void {
-    // var renderer = overlay.Renderer.init();
-    // defer renderer.stop();
-    // try renderer.start();
-    var gpa = std.heap.GeneralPurposeAllocator(.{}){};
-    defer std.debug.assert(gpa.deinit() == .ok);
+    var renderer = overlay.Renderer.init();
+    defer renderer.stop();
+    try renderer.start();
 
-    const allocator = gpa.allocator();
-
-    const src = try source.Source.fromMemory(IRacingTelemetryFileName);
-    defer src.deinit() catch {};
-    const loop = try events.EventLoop.fromWindowsEventFile(IRacingDataEventFileName);
-    defer loop.deinit() catch {};
-    var ctrl = try controller.Controller.init(allocator, src, loop);
-    defer ctrl.deinit();
-
-    var updater = Updater{ .allocator = allocator };
-    updater.count = 0;
-    try ctrl.run(&updater);
+    // var gpa = std.heap.GeneralPurposeAllocator(.{}){};
+    // defer std.debug.assert(gpa.deinit() == .ok);
+    //
+    // const allocator = gpa.allocator();
+    //
+    // const src = try source.Source.fromMemory(IRacingTelemetryFileName);
+    // defer src.deinit() catch {};
+    // const loop = try events.EventLoop.fromWindowsEventFile(IRacingDataEventFileName);
+    // defer loop.deinit() catch {};
+    // var ctrl = try controller.Controller.init(allocator, src, loop);
+    // defer ctrl.deinit();
+    //
+    // var updater = Updater{ .allocator = allocator };
+    // updater.count = 0;
+    // try ctrl.run(&updater);
 }
 
 const Updater = struct {

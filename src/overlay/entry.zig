@@ -1,8 +1,9 @@
 const std = @import("std");
-
+const windows = @import("windows.zig");
 const c = @cImport({
     @cDefine("SDL_DISABLE_OLD_NAMES", {});
     @cDefine("SDL_MAIN_HANDLED", {});
+    @cInclude("windows.h");
     @cInclude("SDL3/SDL.h");
     @cInclude("SDL3/SDL_main.h");
     @cInclude("SDL3/SDL_revision.h");
@@ -63,6 +64,14 @@ pub const Renderer = struct {
 
         try errify(c.SDL_SetWindowKeyboardGrab(self.window, false));
         try errify(c.SDL_SetWindowMouseGrab(self.window, false));
+
+        const hwnd = c.SDL_GetPointerProperty(c.SDL_GetWindowProperties(self.window), c.SDL_PROP_WINDOW_WIN32_HWND_POINTER, c.NULL).?;
+        const casted: std.os.windows.HWND = @ptrCast(hwnd);
+        const getLong = windows.GetWindowLongA(casted, c.GWL_EXSTYLE);
+        const setLong = windows.SetWindowLongA(casted, c.GWL_EXSTYLE, getLong | c.WS_EX_LAYERED | c.WS_EX_TRANSPARENT);
+        const attribs = windows.SetLayeredWindowAttributes(casted, c.RGB(255, 0, 255), 0, c.LWA_COLORKEY);
+        _ = setLong;
+        _ = attribs;
 
         std.log.debug("SDL version: {d}.{d}.{d}; Revision: {s}", .{
             c.SDL_MAJOR_VERSION,
