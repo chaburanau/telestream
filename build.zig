@@ -95,7 +95,7 @@ pub fn build(b: *std.Build) void {
         .preferred_link_mode = .static,
     });
 
-    const yaml = b.dependency("zig-yaml", .{
+    const yaml = b.dependency("yaml", .{
         .target = target,
         .optimize = optimize,
     });

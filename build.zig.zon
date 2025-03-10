@@ -6,16 +6,10 @@
     //
     // It is redundant to include "zig" in this name because it is already
     // within the Zig package namespace.
-    .name = "telestream",
-
-    // This is a [Semantic Version](https://semver.org/).
-    // In a future version of Zig it will be used for package deduplication.
-    .version = "0.0.0",
-
-    // This field is optional.
-    // This is currently advisory only; Zig does not yet do anything
-    // with this value.
-    //.minimum_zig_version = "0.11.0",
+    .name = .telestream,
+    .version = "0.0.1",
+    .fingerprint = 0x153d4076b8cbd088,
+    .minimum_zig_version = "0.14.0",
 
     // This field is optional.
     // Each dependency must either provide a `url` and `hash`, or a `path`.
@@ -23,25 +17,18 @@
     // Once all dependencies are fetched, `zig build` no longer requires
     // internet connectivity.
     .dependencies = .{
-        .ymlz = .{
-            .url = "https://github.com/pwbh/ymlz/archive/refs/tags/0.3.6.tar.gz",
-            .hash = "12202af06541ff4c12c214e1f68d6cacd78aae976708c7405ad785e9e4723093d510",
-        },
-        .@"zig-yaml" = .{
-            .url = "https://github.com/kubkon/zig-yaml/archive/refs/tags/0.0.1.tar.gz",
-            .hash = "1220fbd48b78d55097fbdee3308759dfa7ed9fdd6d3995b7fa04d4a9e790bf7d8cf1",
+        .yaml = .{
+            .url = "https://github.com/kubkon/zig-yaml/archive/refs/tags/0.1.0.tar.gz",
+            .hash = "zig_yaml-0.1.0-C1161hmEAgBeNkAzDaTpcf-2HBydmS1KpJ6FVfGIZfr_",
         },
         .sdl = .{
-            .url = "git+https://github.com/castholm/SDL.git#5179baa2e5154acb229cd4b40c8689498d055691",
-            .hash = "1220655e63d759a534c28ce8ee47f40b2439ba95b6db9fc910c379b1aea294951c55",
+            .url = "git+https://github.com/castholm/SDL.git#dbb1b96360658f5845ff6fac380c4f13d7276dc2",
+            .hash = "sdl-0.2.0+3.2.8-7uIn9FxHfQE325TK7b0qpgt10G3x1xl-3ZMOfTzxUg3C",
         },
     },
     .paths = .{
         "build.zig",
         "build.zig.zon",
         "src",
-        // For example...
-        //"LICENSE",
-        //"README.md",
     },
 }
