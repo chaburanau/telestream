@@ -1,5 +1,5 @@
 const std = @import("std");
-const windows = @import("windows.zig");
+const windows_mem = @import("../windows/memory.zig");
 
 pub const EventLoop = struct {
     windows_event_loop: ?WindowsEventLoop = null,
@@ -27,7 +27,7 @@ const WindowsEventLoop = struct {
 
     fn init(event_file: []const u8) !WindowsEventLoop {
         const handle_name: [:0]const u8 = @ptrCast(event_file);
-        const handle = try windows.openEventA(0x00100000, 0, handle_name.ptr);
+        const handle = try windows_mem.openEventA(0x00100000, 0, handle_name.ptr);
         return WindowsEventLoop{ .events = handle };
     }
 

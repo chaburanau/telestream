@@ -1,6 +1,6 @@
 const std = @import("std");
 const win = std.os.windows;
-const windows = @import("windows.zig");
+const windows_mem = @import("../windows/memory.zig");
 
 // Source describes the source for data from sim
 pub const Source = struct {
@@ -42,8 +42,8 @@ const MemorySource = struct {
 
     fn init(path: []const u8) !MemorySource {
         const handle_name = try win.sliceToPrefixedFileW(null, path);
-        const handle = try windows.openFileMappingW(windows.FILE_MAP_READ, 0, handle_name.span().ptr);
-        const location = try windows.mapViewOfFile(handle, windows.FILE_MAP_READ, 0, 0, 0);
+        const handle = try windows_mem.openFileMappingW(windows_mem.FILE_MAP_READ, 0, handle_name.span().ptr);
+        const location = try windows_mem.mapViewOfFile(handle, windows_mem.FILE_MAP_READ, 0, 0, 0);
 
         return MemorySource{
             .handle = handle,
@@ -57,7 +57,7 @@ const MemorySource = struct {
     }
 
     fn deinit(self: MemorySource) !void {
-        try windows.unmapViewOfFile(self.location);
+        try windows_mem.unmapViewOfFile(self.location);
         win.CloseHandle(self.handle);
     }
 };

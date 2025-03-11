@@ -2,7 +2,7 @@ const std = @import("std");
 const heap = std.heap;
 const http = std.http;
 const win = std.os.windows;
-const windows = @import("windows.zig");
+const windows_mem = @import("../windows/memory.zig");
 const headers = @import("header.zig");
 
 const SimError = error{
@@ -38,9 +38,9 @@ pub const Client = struct {
 
     pub fn init(allocator: std.mem.Allocator, telemetry_file: []const u8, event_file: []const u8) !Client {
         const handle_name = try win.sliceToPrefixedFileW(null, telemetry_file);
-        const handle = try windows.openFileMappingW(windows.FILE_MAP_READ, 0, handle_name.span().ptr);
-        const location = try windows.mapViewOfFile(handle, windows.FILE_MAP_READ, 0, 0, 0);
-        const events = try win.CreateEventEx(null, event_file, win.CREATE_EVENT_MANUAL_RESET, windows.FILE_MAP_READ);
+        const handle = try windows_mem.openFileMappingW(windows_mem.FILE_MAP_READ, 0, handle_name.span().ptr);
+        const location = try windows_mem.mapViewOfFile(handle, windows_mem.FILE_MAP_READ, 0, 0, 0);
+        const events = try win.CreateEventEx(null, event_file, win.CREATE_EVENT_MANUAL_RESET, windows_mem.FILE_MAP_READ);
 
         const client = Client{
             .allocator = allocator,
@@ -53,7 +53,7 @@ pub const Client = struct {
     }
 
     pub fn deinit(self: Client) !void {
-        windows.unmapViewOfFile(self.location);
+        windows_mem.unmapViewOfFile(self.location);
         win.CloseHandle(self.handle);
         win.CloseHandle(self.events);
     }

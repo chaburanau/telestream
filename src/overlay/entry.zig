@@ -1,5 +1,6 @@
 const std = @import("std");
-const windows = @import("windows.zig");
+const windows_ui = @import("../windows/ui.zig");
+
 const c = @cImport({
     @cDefine("SDL_DISABLE_OLD_NAMES", {});
     @cDefine("SDL_MAIN_HANDLED", {});
@@ -71,9 +72,9 @@ pub const Renderer = struct {
         // Click-through transparency
         const hwnd = c.SDL_GetPointerProperty(c.SDL_GetWindowProperties(self.window), c.SDL_PROP_WINDOW_WIN32_HWND_POINTER, c.NULL).?;
         const casted: std.os.windows.HWND = @ptrCast(hwnd);
-        const getLong = windows.GetWindowLongA(casted, c.GWL_EXSTYLE);
-        const setLong = windows.SetWindowLongA(casted, c.GWL_EXSTYLE, getLong | c.WS_EX_LAYERED | c.WS_EX_TRANSPARENT);
-        const attribs = windows.SetLayeredWindowAttributes(casted, c.RGB(255, 0, 255), 0, c.LWA_COLORKEY);
+        const getLong = windows_ui.GetWindowLongA(casted, c.GWL_EXSTYLE);
+        const setLong = windows_ui.SetWindowLongA(casted, c.GWL_EXSTYLE, getLong | c.WS_EX_LAYERED | c.WS_EX_TRANSPARENT);
+        const attribs = windows_ui.SetLayeredWindowAttributes(casted, c.RGB(255, 0, 255), 0, c.LWA_COLORKEY);
         _ = setLong;
         _ = attribs;
 
