@@ -1,0 +1,1939 @@
+Variables:
+        Name: SessionTime
+                Desc: Seconds since session start
+                Unit: s
+                Count: 1
+                Type: iracing.model.VariableType.double
+                Value: iracing.model.Value{ .double = 1.9798166652664725e3 }
+        Name: SessionTick
+                Desc: Current update number
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .int = 119131 }
+        Name: SessionNum
+                Desc: Session number
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .int = 0 }
+        Name: SessionState
+                Desc: Session state
+                Unit: irsdk_SessionState
+                Count: 1
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .int = 4 }
+        Name: SessionUniqueID
+                Desc: Session ID
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .int = 1 }
+        Name: SessionFlags
+                Desc: Session flags
+                Unit: irsdk_Flags
+                Count: 1
+                Type: iracing.model.VariableType.bitfield
+                Value: iracing.model.Value{ .bitfield = 268698112 }
+        Name: SessionTimeRemain
+                Desc: Seconds left till session ends
+                Unit: s
+                Count: 1
+                Type: iracing.model.VariableType.double
+                Value: iracing.model.Value{ .double = 6.048e5 }
+        Name: SessionLapsRemain
+                Desc: Old laps left till session ends use SessionLapsRemainEx
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .int = 32767 }
+        Name: SessionLapsRemainEx
+                Desc: New improved laps left till session ends
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .int = 32767 }
+        Name: SessionTimeTotal
+                Desc: Total number of seconds in session
+                Unit: s
+                Count: 1
+                Type: iracing.model.VariableType.double
+                Value: iracing.model.Value{ .double = 6.048e5 }
+        Name: SessionLapsTotal
+                Desc: Total number of laps in session
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .int = 32767 }
+        Name: SessionJokerLapsRemain
+                Desc: Joker laps remaining to be taken
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .int = 0 }
+        Name: SessionOnJokerLap
+                Desc: Player is currently completing a joker lap
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.bool
+                Value: iracing.model.Value{ .bool = false }
+        Name: SessionTimeOfDay
+                Desc: Time of day in seconds
+                Unit: s
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 5.7779e4 }
+        Name: RadioTransmitCarIdx
+                Desc: The car index of the current person speaking on the radio
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .int = -1 }
+        Name: RadioTransmitRadioIdx
+                Desc: The radio index of the current person speaking on the radio
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .int = 0 }
+        Name: RadioTransmitFrequencyIdx
+                Desc: The frequency index of the current person speaking on the radio
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .int = 0 }
+        Name: DisplayUnits
+                Desc: Default units for the user interface 0 = english 1 = metric
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .int = 1 }
+        Name: DriverMarker
+                Desc: Driver activated flag
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.bool
+                Value: iracing.model.Value{ .bool = false }
+        Name: PushToTalk
+                Desc: Push to talk button state
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.bool
+                Value: iracing.model.Value{ .bool = false }
+        Name: PushToPass
+                Desc: Push to pass button state
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.bool
+                Value: iracing.model.Value{ .bool = false }
+        Name: ManualBoost
+                Desc: Hybrid manual boost state
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.bool
+                Value: iracing.model.Value{ .bool = false }
+        Name: ManualNoBoost
+                Desc: Hybrid manual no boost state
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.bool
+                Value: iracing.model.Value{ .bool = false }
+        Name: IsOnTrack
+                Desc: 1=Car on track physics running with player in car
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.bool
+                Value: iracing.model.Value{ .bool = true }
+        Name: IsReplayPlaying
+                Desc: 0=replay not playing  1=replay playing
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.bool
+                Value: iracing.model.Value{ .bool = false }
+        Name: ReplayFrameNum
+                Desc: Integer replay frame number (60 per second)
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .int = 0 }
+        Name: ReplayFrameNumEnd
+                Desc: Integer replay frame number from end of tape
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .int = 117347 }
+        Name: IsDiskLoggingEnabled
+                Desc: 0=disk based telemetry turned off  1=turned on
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.bool
+                Value: iracing.model.Value{ .bool = false }
+        Name: IsDiskLoggingActive
+                Desc: 0=disk based telemetry file not being written  1=being written
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.bool
+                Value: iracing.model.Value{ .bool = false }
+        Name: FrameRate
+                Desc: Average frames per second
+                Unit: fps
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 1.7129254e2 }
+        Name: CpuUsageFG
+                Desc: Percent of available tim fg thread took with a 1 sec avg
+                Unit: %
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 2.8445882e-1 }
+        Name: GpuUsage
+                Desc: Percent of available tim gpu took with a 1 sec avg
+                Unit: %
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 3.3643717e-1 }
+        Name: ChanAvgLatency
+                Desc: Communications average latency
+                Unit: s
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 3.3228565e-2 }
+        Name: ChanLatency
+                Desc: Communications latency
+                Unit: s
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 3.3333335e-2 }
+        Name: ChanQuality
+                Desc: Communications quality
+                Unit: %
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 1.0000837e0 }
+        Name: ChanPartnerQuality
+                Desc: Partner communications quality
+                Unit: %
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 1e0 }
+        Name: CpuUsageBG
+                Desc: Percent of available tim bg thread took with a 1 sec avg
+                Unit: %
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 1.4200029e-1 }
+        Name: ChanClockSkew
+                Desc: Communications server clock skew
+                Unit: s
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 0e0 }
+        Name: MemPageFaultSec
+                Desc: Memory page faults per second
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 0e0 }
+        Name: MemSoftPageFaultSec
+                Desc: Memory soft page faults per second
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 1.3347e4 }
+        Name: PlayerCarPosition
+                Desc: Players position in race
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .int = 1 }
+        Name: PlayerCarClassPosition
+                Desc: Players class position in race
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .int = 1 }
+        Name: PlayerCarClass
+                Desc: Player car class id
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .int = 0 }
+        Name: PlayerTrackSurface
+                Desc: Players car track surface type
+                Unit: irsdk_TrkLoc
+                Count: 1
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .int = 1 }
+        Name: PlayerTrackSurfaceMaterial
+                Desc: Players car track surface material type
+                Unit: irsdk_TrkSurf
+                Count: 1
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .int = 5 }
+        Name: PlayerCarIdx
+                Desc: Players carIdx
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .int = 0 }
+        Name: PlayerCarTeamIncidentCount
+                Desc: Players team incident count for this session
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .int = 2 }
+        Name: PlayerCarMyIncidentCount
+                Desc: Players own incident count for this session
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .int = 2 }
+        Name: PlayerCarDriverIncidentCount
+                Desc: Teams current drivers incident count for this session
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .int = 2 }
+        Name: PlayerCarWeightPenalty
+                Desc: Players weight penalty
+                Unit: kg
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 0e0 }
+        Name: PlayerCarPowerAdjust
+                Desc: Players power adjust
+                Unit: %
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 0e0 }
+        Name: PlayerCarDryTireSetLimit
+                Desc: Players dry tire set limit
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .int = 0 }
+        Name: PlayerCarTowTime
+                Desc: Players car is being towed if time is greater than zero
+                Unit: s
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 0e0 }
+        Name: PlayerCarInPitStall
+                Desc: Players car is properly in their pitstall
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.bool
+                Value: iracing.model.Value{ .bool = true }
+        Name: PlayerCarPitSvStatus
+                Desc: Players car pit service status bits
+                Unit: irsdk_PitSvStatus
+                Count: 1
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .int = 0 }
+        Name: PlayerTireCompound
+                Desc: Players car current tire compound
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .int = 0 }
+        Name: PlayerFastRepairsUsed
+                Desc: Players car number of fast repairs used
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .int = 0 }
+        Name: CarIdxLap
+                Desc: Laps started by car index
+                Unit:
+                Count: 64
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .ints = { 7, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 } }
+        Name: CarIdxLapCompleted
+                Desc: Laps completed by car index
+                Unit:
+                Count: 64
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .ints = { 6, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 } }
+        Name: CarIdxLapDistPct
+                Desc: Percentage distance around lap by car index
+                Unit: %
+                Count: 64
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .floats = { 4.256471e-2, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0 } }
+        Name: CarIdxTrackSurface
+                Desc: Track surface type by car index
+                Unit: irsdk_TrkLoc
+                Count: 64
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .ints = { 1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 } }
+        Name: CarIdxTrackSurfaceMaterial
+                Desc: Track surface material type by car index
+                Unit: irsdk_TrkSurf
+                Count: 64
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .ints = { 5, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 } }
+        Name: CarIdxOnPitRoad
+                Desc: On pit road between the cones by car index
+                Unit:
+                Count: 64
+                Type: iracing.model.VariableType.bool
+                Value: iracing.model.Value{ .bools = { true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false } }
+        Name: CarIdxPosition
+                Desc: Cars position in race by car index
+                Unit:
+                Count: 64
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .ints = { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 } }
+        Name: CarIdxClassPosition
+                Desc: Cars class position in race by car index
+                Unit:
+                Count: 64
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .ints = { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 } }
+        Name: CarIdxClass
+                Desc: Cars class id by car index
+                Unit:
+                Count: 64
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .ints = { 0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0 } }
+        Name: CarIdxF2Time
+                Desc: Race time behind leader or fastest lap time otherwise
+                Unit: s
+                Count: 64
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .floats = { 1.054161e2, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0 } }
+        Name: CarIdxEstTime
+                Desc: Estimated time to reach current location on track
+                Unit: s
+                Count: 64
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .floats = { 3.4231365e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0 } }
+        Name: CarIdxLastLapTime
+                Desc: Cars last lap time
+                Unit: s
+                Count: 64
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .floats = { 1.089005e2, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0 } }
+        Name: CarIdxBestLapTime
+                Desc: Cars best lap time
+                Unit: s
+                Count: 64
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .floats = { 1.054161e2, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0 } }
+        Name: CarIdxBestLapNum
+                Desc: Cars best lap number
+                Unit:
+                Count: 64
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .ints = { 5, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 } }
+        Name: CarIdxTireCompound
+                Desc: Cars current tire compound
+                Unit:
+                Count: 64
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .ints = { 0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 } }
+        Name: CarIdxQualTireCompound
+                Desc: Cars Qual tire compound
+                Unit:
+                Count: 64
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .ints = { -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 } }
+        Name: CarIdxQualTireCompoundLocked
+                Desc: Cars Qual tire compound is locked-in
+                Unit:
+                Count: 64
+                Type: iracing.model.VariableType.bool
+                Value: iracing.model.Value{ .bools = { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false } }
+        Name: CarIdxFastRepairsUsed
+                Desc: How many fast repairs each car has used
+                Unit:
+                Count: 64
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .ints = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 } }
+        Name: CarIdxSessionFlags
+                Desc: Session flags for each player
+                Unit: irsdk_Flags
+                Count: 64
+                Type: iracing.model.VariableType.bitfield
+                Value: iracing.model.Value{ .bitfields = { 262144, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 } }
+        Name: PaceMode
+                Desc: Are we pacing or not
+                Unit: irsdk_PaceMode
+                Count: 1
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .int = 4 }
+        Name: CarIdxPaceLine
+                Desc: What line cars are pacing in  or -1 if not pacing
+                Unit:
+                Count: 64
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .ints = { -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 } }
+        Name: CarIdxPaceRow
+                Desc: What row cars are pacing in  or -1 if not pacing
+                Unit:
+                Count: 64
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .ints = { -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 } }
+        Name: CarIdxPaceFlags
+                Desc: Pacing status flags for each car
+                Unit: irsdk_PaceFlags
+                Count: 64
+                Type: iracing.model.VariableType.bitfield
+                Value: iracing.model.Value{ .bitfields = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 } }
+        Name: OnPitRoad
+                Desc: Is the player car on pit road between the cones
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.bool
+                Value: iracing.model.Value{ .bool = true }
+        Name: CarIdxSteer
+                Desc: Steering wheel angle by car index
+                Unit: rad
+                Count: 64
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .floats = { -1.7974153e-1, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0, 0e0 } }
+        Name: CarIdxRPM
+                Desc: Engine rpm by car index
+                Unit: revs/min
+                Count: 64
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .floats = { 7.53416e3, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0, -1e0 } }
+        Name: CarIdxGear
+                Desc: -1=reverse  0=neutral  1..n=current gear by car index
+                Unit:
+                Count: 64
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .ints = { 0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 } }
+        Name: SteeringWheelAngle
+                Desc: Steering wheel angle
+                Unit: rad
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = -1.7974153e-1 }
+        Name: Throttle
+                Desc: 0=off throttle to 1=full throttle
+                Unit: %
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 3.648069e-1 }
+        Name: Brake
+                Desc: 0=brake released to 1=max pedal force
+                Unit: %
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 1e0 }
+        Name: Clutch
+                Desc: 0=disengaged to 1=fully engaged
+                Unit: %
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 0e0 }
+        Name: Gear
+                Desc: -1=reverse  0=neutral  1..n=current gear
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .int = 0 }
+        Name: RPM
+                Desc: Engine rpm
+                Unit: revs/min
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 7.53416e3 }
+        Name: PlayerCarSLFirstRPM
+                Desc: Shift light first light rpm
+                Unit: revs/min
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 6e3 }
+        Name: PlayerCarSLShiftRPM
+                Desc: Shift light shift rpm
+                Unit: revs/min
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 7e3 }
+        Name: PlayerCarSLLastRPM
+                Desc: Shift light last light rpm
+                Unit: revs/min
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 7.5e3 }
+        Name: PlayerCarSLBlinkRPM
+                Desc: Shift light blink rpm
+                Unit: revs/min
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 7.55e3 }
+        Name: Lap
+                Desc: Laps started count
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .int = 7 }
+        Name: LapCompleted
+                Desc: Laps completed count
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .int = 6 }
+        Name: LapDist
+                Desc: Meters traveled from S/F this lap
+                Unit: m
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 2.4477953e2 }
+        Name: LapDistPct
+                Desc: Percentage distance around lap
+                Unit: %
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 4.256471e-2 }
+        Name: RaceLaps
+                Desc: Laps completed in race
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .int = 7 }
+        Name: CarDistAhead
+                Desc: Distance to first car in front of player in meters
+                Unit: m
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 5e5 }
+        Name: CarDistBehind
+                Desc: Distance to first car behind player in meters
+                Unit: m
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 5e5 }
+        Name: LapBestLap
+                Desc: Players best lap number
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .int = 5 }
+        Name: LapBestLapTime
+                Desc: Players best lap time
+                Unit: s
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 1.054161e2 }
+        Name: LapLastLapTime
+                Desc: Players last lap time
+                Unit: s
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 1.089005e2 }
+        Name: LapCurrentLapTime
+                Desc: Estimate of players current lap time as shown in F3 box
+                Unit: s
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 1.02116565e3 }
+        Name: LapLasNLapSeq
+                Desc: Player num consecutive clean laps completed for N average
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .int = 0 }
+        Name: LapLastNLapTime
+                Desc: Player last N average lap time
+                Unit: s
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 0e0 }
+        Name: LapBestNLapLap
+                Desc: Player last lap in best N average lap time
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .int = 0 }
+        Name: LapBestNLapTime
+                Desc: Player best N average lap time
+                Unit: s
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 0e0 }
+        Name: LapDeltaToBestLap
+                Desc: Delta time for best lap
+                Unit: s
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 0e0 }
+        Name: LapDeltaToBestLap_DD
+                Desc: Rate of change of delta time for best lap
+                Unit: s/s
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 0e0 }
+        Name: LapDeltaToBestLap_OK
+                Desc: Delta time for best lap is valid
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.bool
+                Value: iracing.model.Value{ .bool = false }
+        Name: LapDeltaToOptimalLap
+                Desc: Delta time for optimal lap
+                Unit: s
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 0e0 }
+        Name: LapDeltaToOptimalLap_DD
+                Desc: Rate of change of delta time for optimal lap
+                Unit: s/s
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 0e0 }
+        Name: LapDeltaToOptimalLap_OK
+                Desc: Delta time for optimal lap is valid
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.bool
+                Value: iracing.model.Value{ .bool = false }
+        Name: LapDeltaToSessionBestLap
+                Desc: Delta time for session best lap
+                Unit: s
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 0e0 }
+        Name: LapDeltaToSessionBestLap_DD
+                Desc: Rate of change of delta time for session best lap
+                Unit: s/s
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 0e0 }
+        Name: LapDeltaToSessionBestLap_OK
+                Desc: Delta time for session best lap is valid
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.bool
+                Value: iracing.model.Value{ .bool = false }
+        Name: LapDeltaToSessionOptimalLap
+                Desc: Delta time for session optimal lap
+                Unit: s
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 0e0 }
+        Name: LapDeltaToSessionOptimalLap_DD
+                Desc: Rate of change of delta time for session optimal lap
+                Unit: s/s
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 0e0 }
+        Name: LapDeltaToSessionOptimalLap_OK
+                Desc: Delta time for session optimal lap is valid
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.bool
+                Value: iracing.model.Value{ .bool = false }
+        Name: LapDeltaToSessionLastlLap
+                Desc: Delta time for session last lap
+                Unit: s
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 0e0 }
+        Name: LapDeltaToSessionLastlLap_DD
+                Desc: Rate of change of delta time for session last lap
+                Unit: s/s
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 0e0 }
+        Name: LapDeltaToSessionLastlLap_OK
+                Desc: Delta time for session last lap is valid
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.bool
+                Value: iracing.model.Value{ .bool = false }
+        Name: Speed
+                Desc: GPS vehicle speed
+                Unit: m/s
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 1.0843497e-3 }
+        Name: Yaw
+                Desc: Yaw orientation
+                Unit: rad
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 3.1387134e0 }
+        Name: YawNorth
+                Desc: Yaw orientation relative to north
+                Unit: rad
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 1.0253763e-1 }
+        Name: Pitch
+                Desc: Pitch orientation
+                Unit: rad
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = -4.2031184e-4 }
+        Name: Roll
+                Desc: Roll orientation
+                Unit: rad
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 2.2433834e-2 }
+        Name: EnterExitReset
+                Desc: Indicate action the reset key will take 0 enter 1 exit 2 reset
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .int = 1 }
+        Name: TrackTemp
+                Desc: Deprecated  set to TrackTempCrew
+                Unit: C
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 3.1111115e1 }
+        Name: TrackTempCrew
+                Desc: Temperature of track measured by crew around track
+                Unit: C
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 3.1111115e1 }
+        Name: AirTemp
+                Desc: Temperature of air at start/finish line
+                Unit: C
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 2.0826557e1 }
+        Name: TrackWetness
+                Desc: How wet is the average track surface
+                Unit: irsdk_TrackWetness
+                Count: 1
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .int = 1 }
+        Name: Skies
+                Desc: Skies (0=clear/1=p cloudy/2=m cloudy/3=overcast)
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .int = 2 }
+        Name: AirDensity
+                Desc: Density of air at start/finish line
+                Unit: kg/m^3
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 1.1827874e0 }
+        Name: AirPressure
+                Desc: Pressure of air at start/finish line
+                Unit: Pa
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 1.00110875e5 }
+        Name: WindVel
+                Desc: Wind velocity at start/finish line
+                Unit: m/s
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 2.8405306e0 }
+        Name: WindDir
+                Desc: Wind direction at start/finish line
+                Unit: rad
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 1.3914992e0 }
+        Name: RelativeHumidity
+                Desc: Relative Humidity at start/finish line
+                Unit: %
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 3.2543072e-1 }
+        Name: FogLevel
+                Desc: Fog level at start/finish line
+                Unit: %
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 0e0 }
+        Name: Precipitation
+                Desc: Precipitation at start/finish line
+                Unit: %
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 0e0 }
+        Name: SolarAltitude
+                Desc: Sun angle above horizon in radians
+                Unit: rad
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 7.754679e-1 }
+        Name: SolarAzimuth
+                Desc: Sun angle clockwise from north in radians
+                Unit: rad
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 4.223418e0 }
+        Name: WeatherDeclaredWet
+                Desc: The steward says rain tires can be used
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.bool
+                Value: iracing.model.Value{ .bool = false }
+        Name: SteeringFFBEnabled
+                Desc: Force feedback is enabled
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.bool
+                Value: iracing.model.Value{ .bool = true }
+        Name: DCLapStatus
+                Desc: Status of driver change lap requirements
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .int = 2 }
+        Name: DCDriversSoFar
+                Desc: Number of team drivers who have run a stint
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .int = 1 }
+        Name: OkToReloadTextures
+                Desc: True if it is ok to reload car textures at this time
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.bool
+                Value: iracing.model.Value{ .bool = true }
+        Name: LoadNumTextures
+                Desc: True if the car_num texture will be loaded
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.bool
+                Value: iracing.model.Value{ .bool = false }
+        Name: CarLeftRight
+                Desc: Notify if car is to the left or right of driver
+                Unit: irsdk_CarLeftRight
+                Count: 1
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .int = 1 }
+        Name: PitsOpen
+                Desc: True if pit stop is allowed for the current player
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.bool
+                Value: iracing.model.Value{ .bool = true }
+        Name: VidCapEnabled
+                Desc: True if video capture system is enabled
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.bool
+                Value: iracing.model.Value{ .bool = false }
+        Name: VidCapActive
+                Desc: True if video currently being captured
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.bool
+                Value: iracing.model.Value{ .bool = false }
+        Name: PitRepairLeft
+                Desc: Time left for mandatory pit repairs if repairs are active
+                Unit: s
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 0e0 }
+        Name: PitOptRepairLeft
+                Desc: Time left for optional repairs if repairs are active
+                Unit: s
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 0e0 }
+        Name: PitstopActive
+                Desc: Is the player getting pit stop service
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.bool
+                Value: iracing.model.Value{ .bool = false }
+        Name: FastRepairUsed
+                Desc: How many fast repairs used so far
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .int = 0 }
+        Name: FastRepairAvailable
+                Desc: How many fast repairs left  255 is unlimited
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .int = 0 }
+        Name: LFTiresUsed
+                Desc: How many left front tires used so far
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .int = 1 }
+        Name: RFTiresUsed
+                Desc: How many right front tires used so far
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .int = 1 }
+        Name: LRTiresUsed
+                Desc: How many left rear tires used so far
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .int = 1 }
+        Name: RRTiresUsed
+                Desc: How many right rear tires used so far
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .int = 1 }
+        Name: LeftTireSetsUsed
+                Desc: How many left tire sets used so far
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .int = 1 }
+        Name: RightTireSetsUsed
+                Desc: How many right tire sets used so far
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .int = 1 }
+        Name: FrontTireSetsUsed
+                Desc: How many front tire sets used so far
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .int = 1 }
+        Name: RearTireSetsUsed
+                Desc: How many rear tire sets used so far
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .int = 1 }
+        Name: TireSetsUsed
+                Desc: How many tire sets used so far
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .int = 1 }
+        Name: LFTiresAvailable
+                Desc: How many left front tires are remaining  255 is unlimited
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .int = 1 }
+        Name: RFTiresAvailable
+                Desc: How many right front tires are remaining  255 is unlimited
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .int = 1 }
+        Name: LRTiresAvailable
+                Desc: How many left rear tires are remaining  255 is unlimited
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .int = 1 }
+        Name: RRTiresAvailable
+                Desc: How many right rear tires are remaining  255 is unlimited
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .int = 1 }
+        Name: LeftTireSetsAvailable
+                Desc: How many left tire sets are remaining  255 is unlimited
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .int = 1 }
+        Name: RightTireSetsAvailable
+                Desc: How many right tire sets are remaining  255 is unlimited
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .int = 1 }
+        Name: FrontTireSetsAvailable
+                Desc: How many front tire sets are remaining  255 is unlimited
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .int = 1 }
+        Name: RearTireSetsAvailable
+                Desc: How many rear tire sets are remaining  255 is unlimited
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .int = 1 }
+        Name: TireSetsAvailable
+                Desc: How many tire sets are remaining  255 is unlimited
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .int = 1 }
+        Name: CamCarIdx
+                Desc: Active camera's focus car index
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .int = 0 }
+        Name: CamCameraNumber
+                Desc: Active camera number
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .int = 1 }
+        Name: CamGroupNumber
+                Desc: Active camera group number
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .int = 9 }
+        Name: CamCameraState
+                Desc: State of camera system
+                Unit: irsdk_CameraState
+                Count: 1
+                Type: iracing.model.VariableType.bitfield
+                Value: iracing.model.Value{ .bitfield = 80 }
+        Name: IsOnTrackCar
+                Desc: 1=Car on track physics running
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.bool
+                Value: iracing.model.Value{ .bool = true }
+        Name: IsInGarage
+                Desc: 1=Car in garage physics running
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.bool
+                Value: iracing.model.Value{ .bool = false }
+        Name: SteeringWheelAngleMax
+                Desc: Steering wheel max angle
+                Unit: rad
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 8.115774e0 }
+        Name: ShiftPowerPct
+                Desc: Friction torque applied to gears when shifting or grinding
+                Unit: %
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 0e0 }
+        Name: ShiftGrindRPM
+                Desc: RPM of shifter grinding noise
+                Unit: RPM
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 0e0 }
+        Name: ThrottleRaw
+                Desc: Raw throttle input 0=off throttle to 1=full throttle
+                Unit: %
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 3.648069e-1 }
+        Name: BrakeRaw
+                Desc: Raw brake input 0=brake released to 1=max pedal force
+                Unit: %
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 0e0 }
+        Name: ClutchRaw
+                Desc: Raw clutch input 0=disengaged to 1=fully engaged
+                Unit: %
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 1e0 }
+        Name: HandbrakeRaw
+                Desc: Raw handbrake input 0=handbrake released to 1=max force
+                Unit: %
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 0e0 }
+        Name: BrakeABSactive
+                Desc: true if abs is currently reducing brake force pressure
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.bool
+                Value: iracing.model.Value{ .bool = false }
+        Name: EngineWarnings
+                Desc: Bitfield for warning lights
+                Unit: irsdk_EngineWarnings
+                Count: 1
+                Type: iracing.model.VariableType.bitfield
+                Value: iracing.model.Value{ .bitfield = 96 }
+        Name: FuelLevelPct
+                Desc: Percent fuel remaining
+                Unit: %
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 7.675973e-1 }
+        Name: PitSvFlags
+                Desc: Bitfield of pit service checkboxes
+                Unit: irsdk_PitSvFlags
+                Count: 1
+                Type: iracing.model.VariableType.bitfield
+                Value: iracing.model.Value{ .bitfield = 0 }
+        Name: PitSvLFP
+                Desc: Pit service left front tire pressure
+                Unit: kPa
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 1.2404088e2 }
+        Name: PitSvRFP
+                Desc: Pit service right front tire pressure
+                Unit: kPa
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 1.2404088e2 }
+        Name: PitSvLRP
+                Desc: Pit service left rear tire pressure
+                Unit: kPa
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 1.2404088e2 }
+        Name: PitSvRRP
+                Desc: Pit service right rear tire pressure
+                Unit: kPa
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 1.2404088e2 }
+        Name: PitSvFuel
+                Desc: Pit service fuel add amount
+                Unit: l or kWh
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 9e1 }
+        Name: PitSvTireCompound
+                Desc: Pit service pending tire compound
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .int = 0 }
+        Name: CarIdxP2P_Status
+                Desc: Push2Pass active or not
+                Unit:
+                Count: 64
+                Type: iracing.model.VariableType.bool
+                Value: iracing.model.Value{ .bools = { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false } }
+        Name: CarIdxP2P_Count
+                Desc: Push2Pass count of usage (or remaining in Race)
+                Unit:
+                Count: 64
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .ints = { -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 } }
+        Name: P2P_Status
+                Desc: Push2Pass active or not on your car
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.bool
+                Value: iracing.model.Value{ .bool = false }
+        Name: P2P_Count
+                Desc: Push2Pass count of usage (or remaining in Race) on your car
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .int = 0 }
+        Name: SteeringWheelPctTorque
+                Desc: Force feedback % max torque on steering shaft unsigned
+                Unit: %
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 1.6581833e-1 }
+        Name: SteeringWheelPctTorqueSign
+                Desc: Force feedback % max torque on steering shaft signed
+                Unit: %
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 1.6581833e-1 }
+        Name: SteeringWheelPctTorqueSignStops
+                Desc: Force feedback % max torque on steering shaft signed stops
+                Unit: %
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 5.473358e-2 }
+        Name: SteeringWheelPctIntensity
+                Desc: Force feedback % max intensity
+                Unit: %
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 1e0 }
+        Name: SteeringWheelPctSmoothing
+                Desc: Force feedback % max smoothing
+                Unit: %
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 0e0 }
+        Name: SteeringWheelPctDamper
+                Desc: Force feedback % max damping
+                Unit: %
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 0e0 }
+        Name: SteeringWheelLimiter
+                Desc: Force feedback limiter strength limits impacts and oscillation
+                Unit: %
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 0e0 }
+        Name: SteeringWheelMaxForceNm
+                Desc: Value of strength or max force slider in Nm for FFB
+                Unit: N*m
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 2.7e1 }
+        Name: SteeringWheelPeakForceNm
+                Desc: Peak torque mapping to direct input units for FFB
+                Unit: N*m
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = -1e0 }
+        Name: SteeringWheelUseLinear
+                Desc: True if steering wheel force is using linear mode
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.bool
+                Value: iracing.model.Value{ .bool = true }
+        Name: ShiftIndicatorPct
+                Desc: DEPRECATED use DriverCarSLBlinkRPM instead
+                Unit: %
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 9.8978263e-1 }
+        Name: ReplayPlaySpeed
+                Desc: Replay playback speed
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .int = 1 }
+        Name: ReplayPlaySlowMotion
+                Desc: 0=not slow motion  1=replay is in slow motion
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.bool
+                Value: iracing.model.Value{ .bool = false }
+        Name: ReplaySessionTime
+                Desc: Seconds since replay session start
+                Unit: s
+                Count: 1
+                Type: iracing.model.VariableType.double
+                Value: iracing.model.Value{ .double = 0e0 }
+        Name: ReplaySessionNum
+                Desc: Replay session number
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.int
+                Value: iracing.model.Value{ .int = -1 }
+        Name: TireLF_RumblePitch
+                Desc: Players LF Tire Sound rumblestrip pitch
+                Unit: Hz
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 0e0 }
+        Name: TireRF_RumblePitch
+                Desc: Players RF Tire Sound rumblestrip pitch
+                Unit: Hz
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 0e0 }
+        Name: TireLR_RumblePitch
+                Desc: Players LR Tire Sound rumblestrip pitch
+                Unit: Hz
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 0e0 }
+        Name: TireRR_RumblePitch
+                Desc: Players RR Tire Sound rumblestrip pitch
+                Unit: Hz
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 0e0 }
+        Name: IsGarageVisible
+                Desc: 1=Garage screen is visible
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.bool
+                Value: iracing.model.Value{ .bool = false }
+        Name: SteeringWheelTorque_ST
+                Desc: Output torque on steering shaft at 360 Hz
+                Unit: N*m
+                Count: 6
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .floats = { 4.4435244e0, 4.485262e0, 4.5139246e0, 4.5223546e0, 4.511677e0, 4.477095e0 } }
+        Name: SteeringWheelTorque
+                Desc: Output torque on steering shaft
+                Unit: N*m
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 4.477095e0 }
+        Name: VelocityZ_ST
+                Desc: Z velocity
+                Unit: m/s at 360 Hz
+                Count: 6
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .floats = { 2.3002423e-4, 2.4106179e-4, 2.62527e-4, 2.7854077e-4, 2.8245602e-4, 2.3558394e-4 } }
+        Name: VelocityY_ST
+                Desc: Y velocity
+                Unit: m/s at 360 Hz
+                Count: 6
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .floats = { -9.6624444e-4, -1.1695419e-3, -1.3315339e-3, -1.4642818e-3, -1.3513173e-3, -1.0838286e-3 } }
+        Name: VelocityX_ST
+                Desc: X velocity
+                Unit: m/s at 360 Hz
+                Count: 6
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .floats = { -6.5281245e-5, -5.869899e-5, -5.288752e-5, -4.719918e-5, -4.144486e-5, -3.361353e-5 } }
+        Name: VelocityZ
+                Desc: Z velocity
+                Unit: m/s
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 2.3558394e-4 }
+        Name: VelocityY
+                Desc: Y velocity
+                Unit: m/s
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = -1.0838286e-3 }
+        Name: VelocityX
+                Desc: X velocity
+                Unit: m/s
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = -3.361353e-5 }
+        Name: YawRate_ST
+                Desc: Yaw rate at 360 Hz
+                Unit: rad/s
+                Count: 6
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .floats = { 1.2582516e-4, 1.9937677e-5, -3.620614e-5, -4.9740498e-5, 9.331614e-5, 3.150178e-4 } }
+        Name: PitchRate_ST
+                Desc: Pitch rate at 360 Hz
+                Unit: rad/s
+                Count: 6
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .floats = { -1.593281e-4, -1.6550356e-4, -1.8259544e-4, -1.9407283e-4, -1.9330495e-4, -1.4012356e-4 } }
+        Name: RollRate_ST
+                Desc: Roll rate at 360 Hz
+                Unit: rad/s
+                Count: 6
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .floats = { 8.5986275e-3, 1.3332665e-2, 1.667779e-2, 1.8683117e-2, 1.5521633e-2, 9.215828e-3 } }
+        Name: YawRate
+                Desc: Yaw rate
+                Unit: rad/s
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 3.150178e-4 }
+        Name: PitchRate
+                Desc: Pitch rate
+                Unit: rad/s
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = -1.4012356e-4 }
+        Name: RollRate
+                Desc: Roll rate
+                Unit: rad/s
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 9.215828e-3 }
+        Name: VertAccel_ST
+                Desc: Vertical acceleration (including gravity) at 360 Hz
+                Unit: m/s^2
+                Count: 6
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .floats = { 9.790857e0, 9.808183e0, 9.811921e0, 9.809941e0, 9.80557e0, 9.787291e0 } }
+        Name: LatAccel_ST
+                Desc: Lateral acceleration (including gravity) at 360 Hz
+                Unit: m/s^2
+                Count: 6
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .floats = { 1.7127354e-1, 1.4502575e-1, 1.6031255e-1, 1.713298e-1, 2.6031336e-1, 3.162747e-1 } }
+        Name: LongAccel_ST
+                Desc: Longitudinal acceleration (including gravity) at 360 Hz
+                Unit: m/s^2
+                Count: 6
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .floats = { 7.6407604e-3, 6.4715627e-3, 6.198613e-3, 6.15934e-3, 6.188402e-3, 6.941369e-3 } }
+        Name: VertAccel
+                Desc: Vertical acceleration (including gravity)
+                Unit: m/s^2
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 9.787291e0 }
+        Name: LatAccel
+                Desc: Lateral acceleration (including gravity)
+                Unit: m/s^2
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 3.162747e-1 }
+        Name: LongAccel
+                Desc: Longitudinal acceleration (including gravity)
+                Unit: m/s^2
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 6.941369e-3 }
+        Name: dcStarter
+                Desc: In car trigger car starter
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.bool
+                Value: iracing.model.Value{ .bool = false }
+        Name: dcPitSpeedLimiterToggle
+                Desc: In car traction control active
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.bool
+                Value: iracing.model.Value{ .bool = false }
+        Name: dcTractionControlToggle
+                Desc: In car traction control active
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.bool
+                Value: iracing.model.Value{ .bool = false }
+        Name: dcHeadlightFlash
+                Desc: In car headlight flash control active
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.bool
+                Value: iracing.model.Value{ .bool = false }
+        Name: dpRFTireChange
+                Desc: Pitstop rf tire change request
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 0e0 }
+        Name: dpLFTireChange
+                Desc: Pitstop lf tire change request
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 0e0 }
+        Name: dpRRTireChange
+                Desc: Pitstop rr tire change request
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 0e0 }
+        Name: dpLRTireChange
+                Desc: Pitstop lr tire change request
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 0e0 }
+        Name: dpFuelFill
+                Desc: Pitstop fuel fill flag
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 0e0 }
+        Name: dpFuelAutoFillEnabled
+                Desc: Pitstop auto fill fuel system enabled
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 0e0 }
+        Name: dpFuelAutoFillActive
+                Desc: Pitstop auto fill fuel next stop flag
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 0e0 }
+        Name: dpWindshieldTearoff
+                Desc: Pitstop windshield tearoff
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 0e0 }
+        Name: dpFuelAddKg
+                Desc: Pitstop fuel add amount
+                Unit: kg
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 9e1 }
+        Name: dpFastRepair
+                Desc: Pitstop fast repair set
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 0e0 }
+        Name: dcBrakeBias
+                Desc: In car brake bias adjustment
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 5.06e1 }
+        Name: dpLFTireColdPress
+                Desc: Pitstop lf tire cold pressure adjustment
+                Unit: Pa
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 1.2404088e2 }
+        Name: dpRFTireColdPress
+                Desc: Pitstop rf cold tire pressure adjustment
+                Unit: Pa
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 1.2404088e2 }
+        Name: dpLRTireColdPress
+                Desc: Pitstop lr tire cold pressure adjustment
+                Unit: Pa
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 1.2404088e2 }
+        Name: dpRRTireColdPress
+                Desc: Pitstop rr cold tire pressure adjustment
+                Unit: Pa
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 1.2404088e2 }
+        Name: dcTractionControl
+                Desc: In car traction control adjustment
+                Unit:
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 5e0 }
+        Name: FuelUsePerHour
+                Desc: Engine fuel used instantaneous
+                Unit: kg/h
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 2.2413507e0 }
+        Name: Voltage
+                Desc: Engine voltage
+                Unit: V
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 1.3400001e1 }
+        Name: WaterTemp
+                Desc: Engine coolant temp
+                Unit: C
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 9.1227875e1 }
+        Name: WaterLevel
+                Desc: Engine coolant level
+                Unit: l
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 1e1 }
+        Name: FuelPress
+                Desc: Engine fuel pressure
+                Unit: bar
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 3.79e0 }
+        Name: OilTemp
+                Desc: Engine oil temperature
+                Unit: C
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 1.4574857e2 }
+        Name: OilPress
+                Desc: Engine oil pressure
+                Unit: bar
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 2.0592675e0 }
+        Name: OilLevel
+                Desc: Engine oil level
+                Unit: l
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 7e0 }
+        Name: ManifoldPress
+                Desc: Engine manifold pressure
+                Unit: bar
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 7.160812e-1 }
+        Name: FuelLevel
+                Desc: Liters of fuel remaining
+                Unit: l
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 6.908376e1 }
+        Name: Engine0_RPM
+                Desc: Engine0Engine rpm
+                Unit: revs/min
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 7.534163e3 }
+        Name: RFbrakeLinePress
+                Desc: RF brake line pressure
+                Unit: bar
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 0e0 }
+        Name: RFcoldPressure
+                Desc: RF tire cold pressure  as set in the garage
+                Unit: kPa
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 1.2404088e2 }
+        Name: RFtempCL
+                Desc: RF tire left carcass temperature
+                Unit: C
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 8.333801e1 }
+        Name: RFtempCM
+                Desc: RF tire middle carcass temperature
+                Unit: C
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 7.4740204e1 }
+        Name: RFtempCR
+                Desc: RF tire right carcass temperature
+                Unit: C
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 6.762573e1 }
+        Name: RFwearL
+                Desc: RF tire left percent tread remaining
+                Unit: %
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 9.733778e-1 }
+        Name: RFwearM
+                Desc: RF tire middle percent tread remaining
+                Unit: %
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 9.775966e-1 }
+        Name: RFwearR
+                Desc: RF tire right percent tread remaining
+                Unit: %
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 9.873453e-1 }
+        Name: LFbrakeLinePress
+                Desc: LF brake line pressure
+                Unit: bar
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 0e0 }
+        Name: LFcoldPressure
+                Desc: LF tire cold pressure  as set in the garage
+                Unit: kPa
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 1.2404088e2 }
+        Name: LFtempCL
+                Desc: LF tire left carcass temperature
+                Unit: C
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 8.110571e1 }
+        Name: LFtempCM
+                Desc: LF tire middle carcass temperature
+                Unit: C
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 8.727649e1 }
+        Name: LFtempCR
+                Desc: LF tire right carcass temperature
+                Unit: C
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 9.509897e1 }
+        Name: LFwearL
+                Desc: LF tire left percent tread remaining
+                Unit: %
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 9.746029e-1 }
+        Name: LFwearM
+                Desc: LF tire middle percent tread remaining
+                Unit: %
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 9.7090894e-1 }
+        Name: LFwearR
+                Desc: LF tire right percent tread remaining
+                Unit: %
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 9.700441e-1 }
+        Name: RRbrakeLinePress
+                Desc: RR brake line pressure
+                Unit: bar
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 0e0 }
+        Name: RRcoldPressure
+                Desc: RR tire cold pressure  as set in the garage
+                Unit: kPa
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 1.2404088e2 }
+        Name: RRtempCL
+                Desc: RR tire left carcass temperature
+                Unit: C
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 9.6977875e1 }
+        Name: RRtempCM
+                Desc: RR tire middle carcass temperature
+                Unit: C
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 8.824313e1 }
+        Name: RRtempCR
+                Desc: RR tire right carcass temperature
+                Unit: C
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 7.805612e1 }
+        Name: RRwearL
+                Desc: RR tire left percent tread remaining
+                Unit: %
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 9.6976256e-1 }
+        Name: RRwearM
+                Desc: RR tire middle percent tread remaining
+                Unit: %
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 9.740414e-1 }
+        Name: RRwearR
+                Desc: RR tire right percent tread remaining
+                Unit: %
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 9.8858047e-1 }
+        Name: LRbrakeLinePress
+                Desc: LR brake line pressure
+                Unit: bar
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 0e0 }
+        Name: LRcoldPressure
+                Desc: LR tire cold pressure  as set in the garage
+                Unit: kPa
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 1.2404088e2 }
+        Name: LRtempCL
+                Desc: LR tire left carcass temperature
+                Unit: C
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 8.610324e1 }
+        Name: LRtempCM
+                Desc: LR tire middle carcass temperature
+                Unit: C
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 9.428497e1 }
+        Name: LRtempCR
+                Desc: LR tire right carcass temperature
+                Unit: C
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 1.0215039e2 }
+        Name: LRwearL
+                Desc: LR tire left percent tread remaining
+                Unit: %
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 9.8506606e-1 }
+        Name: LRwearM
+                Desc: LR tire middle percent tread remaining
+                Unit: %
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 9.7437555e-1 }
+        Name: LRwearR
+                Desc: LR tire right percent tread remaining
+                Unit: %
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 9.717825e-1 }
+        Name: LRshockDefl
+                Desc: LR shock deflection
+                Unit: m
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 8.448082e-2 }
+        Name: LRshockDefl_ST
+                Desc: LR shock deflection at 360 Hz
+                Unit: m
+                Count: 6
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .floats = { 8.4539495e-2, 8.452717e-2, 8.451588e-2, 8.450487e-2, 8.4493294e-2, 8.448082e-2 } }
+        Name: LRshockVel
+                Desc: LR shock velocity
+                Unit: m/s
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = -4.6281037e-3 }
+        Name: LRshockVel_ST
+                Desc: LR shock velocity at 360 Hz
+                Unit: m/s
+                Count: 6
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .floats = { -4.6608537e-3, -4.2253165e-3, -3.999617e-3, -4.060864e-3, -4.3507223e-3, -4.6281037e-3 } }
+        Name: RRshockDefl
+                Desc: RR shock deflection
+                Unit: m
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 8.380018e-2 }
+        Name: RRshockDefl_ST
+                Desc: RR shock deflection at 360 Hz
+                Unit: m
+                Count: 6
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .floats = { 8.3741456e-2, 8.3753645e-2, 8.376492e-2, 8.377592e-2, 8.3787546e-2, 8.380018e-2 } }
+        Name: RRshockVel
+                Desc: RR shock velocity
+                Unit: m/s
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 4.658377e-3 }
+        Name: RRshockVel_ST
+                Desc: RR shock velocity at 360 Hz
+                Unit: m/s
+                Count: 6
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .floats = { 4.616502e-3, 4.198335e-3, 3.9956574e-3, 4.0732385e-3, 4.3934025e-3, 4.658377e-3 } }
+        Name: LFshockDefl
+                Desc: LF shock deflection
+                Unit: m
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 8.5519664e-2 }
+        Name: LFshockDefl_ST
+                Desc: LF shock deflection at 360 Hz
+                Unit: m
+                Count: 6
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .floats = { 8.559649e-2, 8.5585125e-2, 8.556748e-2, 8.554694e-2, 8.5526325e-2, 8.5519664e-2 } }
+        Name: LFshockVel
+                Desc: LF shock velocity
+                Unit: m/s
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = -8.512844e-4 }
+        Name: LFshockVel_ST
+                Desc: LF shock velocity at 360 Hz
+                Unit: m/s
+                Count: 6
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .floats = { -2.2716303e-3, -5.223255e-3, -6.861325e-3, -7.381875e-3, -4.637807e-3, -8.512844e-4 } }
+        Name: RFshockDefl
+                Desc: RF shock deflection
+                Unit: m
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = 8.6236656e-2 }
+        Name: RFshockDefl_ST
+                Desc: RF shock deflection at 360 Hz
+                Unit: m
+                Count: 6
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .floats = { 8.61731e-2, 8.618533e-2, 8.6201675e-2, 8.621868e-2, 8.623437e-2, 8.6236656e-2 } }
+        Name: RFshockVel
+                Desc: RF shock velocity
+                Unit: m/s
+                Count: 1
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .float = -4.5296492e-5 }
+        Name: RFshockVel_ST
+                Desc: RF shock velocity at 360 Hz
+                Unit: m/s
+                Count: 6
+                Type: iracing.model.VariableType.float
+                Value: iracing.model.Value{ .floats = { 2.5493149e-3, 5.0283307e-3, 5.916327e-3, 5.8168704e-3, 2.7770728e-3, -4.5296492e-5 } }

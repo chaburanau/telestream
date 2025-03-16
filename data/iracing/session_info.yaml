@@ -1,0 +1,732 @@
+WeekendInfo:
+    TrackName: monza full
+    TrackID: 239
+    TrackLength: 5.75 km
+    TrackLengthOfficial: 5.79 km
+    TrackDisplayName: Autodromo Nazionale Monza
+    TrackDisplayShortName: Monza Full
+    TrackConfigName:
+        TrackCity: Monza
+        TrackCountry: Italy
+        TrackAltitude: 182.71 m
+        TrackLatitude: 45.616196 m
+        TrackLongitude: 9.280776 m
+        TrackNorthOffset: 3.2413 rad
+        TrackNumTurns: 11
+        TrackPitSpeedLimit: 80.00 kph
+        TrackType: road course
+        TrackDirection: neutral
+        TrackWeatherType: Realistic
+        TrackSkies: Dynamic
+        TrackSurfaceTemp: 26.86 C
+        TrackAirTemp: 20.86 C
+        TrackAirPressure: 29.57 Hg
+        TrackWindVel: 2.43 m/s
+        TrackWindDir: 0.86 rad
+        TrackRelativeHumidity: 32 %
+        TrackFogLevel: 0 %
+        TrackPrecipitation: 0 %
+        TrackCleanup: 1
+        TrackDynamicTrack: 1
+        TrackVersion: 2025.03.03.01
+        SeriesID: 0
+        SeasonID: 0
+        SessionID: 0
+        SubSessionID: 0
+        LeagueID: 0
+        Official: 0
+        RaceWeek: 0
+        EventType: Test
+        Category: Road
+        SimMode: full
+        TeamRacing: 0
+        MinDrivers: 0
+        MaxDrivers: 0
+        DCRuleSet: None
+        QualifierMustStartRace: 0
+        NumCarClasses: 1
+        NumCarTypes: 1
+        HeatRacing: 0
+        BuildType: Release
+        BuildTarget: Members
+        BuildVersion: 2025.03.10.03
+        RaceFarm:
+            WeekendOptions:
+                NumStarters: 0
+                StartingGrid: single file
+                QualifyScoring: best lap
+                CourseCautions: false
+                StandingStart: 0
+                ShortParadeLap: 0
+                Restarts: single file
+                WeatherType: Realistic
+                Skies: Dynamic
+                WindDirection: false
+                WindSpeed: 3.22 km/h
+                WeatherTemp: 25.56 C
+                RelativeHumidity: 45 %
+                FogLevel: 0 %
+                TimeOfDay: 3:30 pm
+                Date: 2024-05-02
+                EarthRotationSpeedupFactor: 1
+                Unofficial: 1
+                CommercialMode: consumer
+                NightMode: variable
+                IsFixedSetup: 0
+                StrictLapsChecking: default
+                HasOpenRegistration: 0
+                HardcoreLevel: 1
+                NumJokerLaps: 0
+                IncidentLimit: unlimited
+                FastRepairsLimit: unlimited
+                GreenWhiteCheckeredLimit: 0
+            TelemetryOptions:
+                TelemetryDiskFile:
+SessionInfo:
+    CurrentSessionNum: 0
+    Sessions:
+        - SessionNum: 0
+          SessionLaps: unlimited
+          SessionTime: unlimited
+          SessionNumLapsToAvg: 0
+          SessionType: Offline Testing
+          SessionTrackRubberState: moderately low usage
+          SessionName: TESTING
+          SessionSubType:
+              SessionSkipped: 0
+              SessionRunGroupsUsed: 0
+              SessionEnforceTireCompoundChange: 0
+              ResultsPositions:
+                  - Position: 1
+                    ClassPosition: 0
+                    CarIdx: 0
+                    Lap: 5
+                    Time: 105.4161
+                    FastestLap: 5
+                    FastestTime: 105.4161
+                    LastTime: 108.9005
+                    LapsLed: 0
+                    LapsComplete: 6
+                    JokerLapsComplete: 0
+                    LapsDriven: 0
+                    Incidents: 0
+                    ReasonOutId: 0
+                    ReasonOutStr: Running
+              ResultsFastestLap:
+                  - CarIdx: 0
+                    FastestLap: 5
+                    FastestTime: 105.4161
+              ResultsAverageLapTime: -1
+              ResultsNumCautionFlags: 0
+              ResultsNumCautionLaps: 0
+              ResultsNumLeadChanges: 0
+              ResultsLapsComplete: -1
+              ResultsOfficial: 0
+CameraInfo:
+    Groups:
+        - GroupNum: 1
+          GroupName: Nose
+          Cameras:
+              - CameraNum: 1
+                CameraName: CamNose
+        - GroupNum: 2
+          GroupName: Gearbox
+          Cameras:
+              - CameraNum: 1
+                CameraName: CamGearbox
+        - GroupNum: 3
+          GroupName: Roll Bar
+          Cameras:
+              - CameraNum: 1
+                CameraName: CamRoll Bar
+        - GroupNum: 4
+          GroupName: LF Susp
+          Cameras:
+              - CameraNum: 1
+                CameraName: CamLF Susp
+        - GroupNum: 5
+          GroupName: LR Susp
+          Cameras:
+              - CameraNum: 1
+                CameraName: CamLR Susp
+        - GroupNum: 6
+          GroupName: Gyro
+          Cameras:
+              - CameraNum: 1
+                CameraName: CamGyro
+        - GroupNum: 7
+          GroupName: RF Susp
+          Cameras:
+              - CameraNum: 1
+                CameraName: CamRF Susp
+        - GroupNum: 8
+          GroupName: RR Susp
+          Cameras:
+              - CameraNum: 1
+                CameraName: CamRR Susp
+        - GroupNum: 9
+          GroupName: Cockpit
+          Cameras:
+              - CameraNum: 1
+                CameraName: CamCockpit
+        - GroupNum: 10
+          GroupName: Scenic
+          IsScenic: true
+          Cameras:
+              - CameraNum: 1
+                CameraName: Scenic_10
+              - CameraNum: 2
+                CameraName: Scenic_01
+              - CameraNum: 3
+                CameraName: Scenic_02
+              - CameraNum: 4
+                CameraName: Scenic_03
+              - CameraNum: 5
+                CameraName: Scenic_04
+              - CameraNum: 6
+                CameraName: Scenic_05
+              - CameraNum: 7
+                CameraName: Scenic_06
+              - CameraNum: 8
+                CameraName: Scenic_07
+              - CameraNum: 9
+                CameraName: Scenic_08
+              - CameraNum: 10
+                CameraName: Scenic_09
+        - GroupNum: 11
+          GroupName: TV1
+          Cameras:
+              - CameraNum: 1
+                CameraName: CamTV1_13
+              - CameraNum: 2
+                CameraName: CamTV1_01
+              - CameraNum: 3
+                CameraName: CamTV1_10
+              - CameraNum: 4
+                CameraName: CamTV1_08
+              - CameraNum: 5
+                CameraName: CamTV1_09
+              - CameraNum: 6
+                CameraName: CamTV1_06
+              - CameraNum: 7
+                CameraName: CamTV1_04
+              - CameraNum: 8
+                CameraName: CamTV1_05
+              - CameraNum: 9
+                CameraName: CamTV1_06b
+              - CameraNum: 10
+                CameraName: CamTV1_12
+              - CameraNum: 11
+                CameraName: CamTV1_03
+              - CameraNum: 12
+                CameraName: CamTV1_07
+              - CameraNum: 13
+                CameraName: CamTV1_11
+              - CameraNum: 14
+                CameraName: CamTV1_02
+        - GroupNum: 12
+          GroupName: TV2
+          Cameras:
+              - CameraNum: 1
+                CameraName: CamTV2_14
+              - CameraNum: 2
+                CameraName: CamTV2_15
+              - CameraNum: 3
+                CameraName: CamTV2_16
+              - CameraNum: 4
+                CameraName: CamTV2_13
+              - CameraNum: 5
+                CameraName: CamTV2_12
+              - CameraNum: 6
+                CameraName: CamTV2_17
+              - CameraNum: 7
+                CameraName: CamTV2_09
+              - CameraNum: 8
+                CameraName: CamTV2_07
+              - CameraNum: 9
+                CameraName: CamTV2_01
+              - CameraNum: 10
+                CameraName: CamTV2_10
+              - CameraNum: 11
+                CameraName: CamTV2_06
+              - CameraNum: 12
+                CameraName: CamTV2_06b
+              - CameraNum: 13
+                CameraName: CamTV2_03
+              - CameraNum: 14
+                CameraName: CamTV2_04
+              - CameraNum: 15
+                CameraName: CamTV2_05
+              - CameraNum: 16
+                CameraName: CamTV2_08
+              - CameraNum: 17
+                CameraName: CamTV2_02
+              - CameraNum: 18
+                CameraName: CamTV2_11
+        - GroupNum: 13
+          GroupName: TV3
+          Cameras:
+              - CameraNum: 1
+                CameraName: CamTV3_02
+              - CameraNum: 2
+                CameraName: CamTV3_01
+              - CameraNum: 3
+                CameraName: CamTV3_03
+              - CameraNum: 4
+                CameraName: CamTV3_05
+              - CameraNum: 5
+                CameraName: CamTV3_04
+              - CameraNum: 6
+                CameraName: CamTV3_06
+              - CameraNum: 7
+                CameraName: CamTV3_07
+              - CameraNum: 8
+                CameraName: CamTV3_08
+              - CameraNum: 9
+                CameraName: CamTV3_10
+              - CameraNum: 10
+                CameraName: CamTV3_11
+              - CameraNum: 11
+                CameraName: CamTV3_09
+        - GroupNum: 14
+          GroupName: TV Static
+          Cameras:
+              - CameraNum: 1
+                CameraName: CamTV4_01
+              - CameraNum: 2
+                CameraName: CamTV4_04
+              - CameraNum: 3
+                CameraName: CamTV4_03
+              - CameraNum: 4
+                CameraName: CamTV4_02
+              - CameraNum: 5
+                CameraName: CamTV4_05
+              - CameraNum: 6
+                CameraName: CamTV4_06
+              - CameraNum: 7
+                CameraName: CamTV4_07
+              - CameraNum: 8
+                CameraName: CamTV4_08
+              - CameraNum: 9
+                CameraName: CamTV4_09
+              - CameraNum: 10
+                CameraName: CamTV4_11
+              - CameraNum: 11
+                CameraName: CamTV4_12
+              - CameraNum: 12
+                CameraName: CamTV4_13
+              - CameraNum: 13
+                CameraName: CamTV4_14
+              - CameraNum: 14
+                CameraName: CamTV4_16
+              - CameraNum: 15
+                CameraName: CamTV4_15
+              - CameraNum: 16
+                CameraName: CamTV4_10
+              - CameraNum: 17
+                CameraName: CamTV4_17
+        - GroupNum: 15
+          GroupName: TV Mixed
+          Cameras:
+              - CameraNum: 1
+                CameraName: CamTV1_01
+              - CameraNum: 2
+                CameraName: CamTV1_02
+              - CameraNum: 3
+                CameraName: CamTV1_03
+              - CameraNum: 4
+                CameraName: CamTV1_04
+              - CameraNum: 5
+                CameraName: CamTV1_05
+              - CameraNum: 6
+                CameraName: CamTV1_06b
+              - CameraNum: 7
+                CameraName: CamTV1_06
+              - CameraNum: 8
+                CameraName: CamTV1_07
+              - CameraNum: 9
+                CameraName: CamTV1_08
+              - CameraNum: 10
+                CameraName: CamTV1_09
+              - CameraNum: 11
+                CameraName: CamTV1_10
+              - CameraNum: 12
+                CameraName: CamTV1_11
+              - CameraNum: 13
+                CameraName: CamTV1_12
+              - CameraNum: 14
+                CameraName: CamTV1_13b
+              - CameraNum: 15
+                CameraName: CamTV1_13
+              - CameraNum: 16
+                CameraName: CamTV2_01
+              - CameraNum: 17
+                CameraName: CamTV2_02
+              - CameraNum: 18
+                CameraName: CamTV2_03
+              - CameraNum: 19
+                CameraName: CamTV2_04
+              - CameraNum: 20
+                CameraName: CamTV2_05
+              - CameraNum: 21
+                CameraName: CamTV2_06
+              - CameraNum: 22
+                CameraName: CamTV2_06b
+              - CameraNum: 23
+                CameraName: CamTV2_07
+              - CameraNum: 24
+                CameraName: CamTV2_08
+              - CameraNum: 25
+                CameraName: CamTV2_09
+              - CameraNum: 26
+                CameraName: CamTV2_09b
+              - CameraNum: 27
+                CameraName: CamTV2_10
+              - CameraNum: 28
+                CameraName: CamTV2_11
+              - CameraNum: 29
+                CameraName: CamTV2_13
+              - CameraNum: 30
+                CameraName: CamTV2_17
+              - CameraNum: 31
+                CameraName: CamTV3_01
+              - CameraNum: 32
+                CameraName: CamTV3_02
+              - CameraNum: 33
+                CameraName: CamTV3_03
+              - CameraNum: 34
+                CameraName: CamTV3_04
+              - CameraNum: 35
+                CameraName: CamTV3_05
+              - CameraNum: 36
+                CameraName: CamTV3_06
+              - CameraNum: 37
+                CameraName: CamTV3_07
+              - CameraNum: 38
+                CameraName: CamTV3_08
+              - CameraNum: 39
+                CameraName: CamTV3_10
+              - CameraNum: 40
+                CameraName: CamTV3_11
+              - CameraNum: 41
+                CameraName: CamTV4_02
+              - CameraNum: 42
+                CameraName: CamTV4_05
+              - CameraNum: 43
+                CameraName: CamTV4_14
+              - CameraNum: 44
+                CameraName: CamTV2_12
+              - CameraNum: 45
+                CameraName: CamRoll Bar
+              - CameraNum: 46
+                CameraName: CamTV4_03
+              - CameraNum: 47
+                CameraName: CamTV4_09
+              - CameraNum: 48
+                CameraName: CamTV4_13
+        - GroupNum: 16
+          GroupName: Pit Lane
+          Cameras:
+              - CameraNum: 1
+                CameraName: CamPit Lane2
+              - CameraNum: 2
+                CameraName: CamPit Lane1
+              - CameraNum: 3
+                CameraName: CamPit Lane3
+        - GroupNum: 17
+          GroupName: Pit Lane2
+          Cameras:
+              - CameraNum: 1
+                CameraName: CamPit Lane4
+        - GroupNum: 18
+          GroupName: Blimp
+          Cameras:
+              - CameraNum: 1
+                CameraName: CamBlimp
+        - GroupNum: 19
+          GroupName: Chopper
+          Cameras:
+              - CameraNum: 1
+                CameraName: CamChopper
+        - GroupNum: 20
+          GroupName: Chase
+          Cameras:
+              - CameraNum: 1
+                CameraName: CamChase
+        - GroupNum: 21
+          GroupName: Far Chase
+          Cameras:
+              - CameraNum: 1
+                CameraName: CamFar Chase
+        - GroupNum: 22
+          GroupName: Rear Chase
+          Cameras:
+              - CameraNum: 1
+                CameraName: CamRear Chase
+RadioInfo:
+    SelectedRadioNum: 0
+    Radios:
+        - RadioNum: 0
+          HopCount: 2
+          NumFrequencies: 7
+          TunedToFrequencyNum: 0
+          ScanningIsOn: 1
+          Frequencies:
+              - FrequencyNum: 0
+                FrequencyName: @ALLTEAMS
+                Priority: 12
+                CarIdx: -1
+                EntryIdx: -1
+                ClubID: 0
+                CanScan: 1
+                CanSquawk: 1
+                Muted: 0
+                IsMutable: 1
+                IsDeletable: 0
+              - FrequencyNum: 1
+                FrequencyName: @DRIVERS
+                Priority: 15
+                CarIdx: -1
+                EntryIdx: -1
+                ClubID: 0
+                CanScan: 1
+                CanSquawk: 1
+                Muted: 0
+                IsMutable: 1
+                IsDeletable: 0
+              - FrequencyNum: 2
+                FrequencyName: @TEAM
+                Priority: 60
+                CarIdx: 0
+                EntryIdx: -1
+                ClubID: 0
+                CanScan: 1
+                CanSquawk: 1
+                Muted: 0
+                IsMutable: 0
+                IsDeletable: 0
+              - FrequencyNum: 3
+                FrequencyName: @CLUB
+                Priority: 20
+                CarIdx: -1
+                EntryIdx: -1
+                ClubID: 46
+                CanScan: 1
+                CanSquawk: 1
+                Muted: 0
+                IsMutable: 1
+                IsDeletable: 0
+              - FrequencyNum: 4
+                FrequencyName: @ADMIN
+                Priority: 90
+                CarIdx: -1
+                EntryIdx: -1
+                ClubID: 0
+                CanScan: 1
+                CanSquawk: 1
+                Muted: 0
+                IsMutable: 0
+                IsDeletable: 0
+              - FrequencyNum: 5
+                FrequencyName: @RACECONTROL
+                Priority: 80
+                CarIdx: -1
+                EntryIdx: -1
+                ClubID: 0
+                CanScan: 1
+                CanSquawk: 1
+                Muted: 0
+                IsMutable: 0
+                IsDeletable: 0
+              - FrequencyNum: 6
+                FrequencyName: @PRIVATE
+                Priority: 70
+                CarIdx: -1
+                EntryIdx: 0
+                ClubID: 0
+                CanScan: 1
+                CanSquawk: 1
+                Muted: 0
+                IsMutable: 0
+                IsDeletable: 0
+DriverInfo:
+    DriverCarIdx: 0
+    DriverUserID: 982139
+    PaceCarIdx: -1
+    DriverHeadPosX: -0.42
+    DriverHeadPosY: 0.328
+    DriverHeadPosZ: 0.534
+    DriverCarIsElectric: 0
+    DriverCarIdleRPM: 1100
+    DriverCarRedLine: 7600
+    DriverCarEngCylinderCount: 12
+    DriverCarFuelKgPerLtr: 0.75
+    DriverCarFuelMaxLtr: 90
+    DriverCarMaxFuelPct: 1
+    DriverCarGearNumForward: 6
+    DriverCarGearNeutral: 1
+    DriverCarGearReverse: 1
+    DriverCarSLFirstRPM: 6000
+    DriverCarSLShiftRPM: 7000
+    DriverCarSLLastRPM: 7500
+    DriverCarSLBlinkRPM: 7550
+    DriverCarVersion: 2025.03.07.02
+    DriverPitTrkPct: 0.042565
+    DriverCarEstLapTime: 101.9185
+    DriverSetupName: lemans.sto
+    DriverSetupIsModified: 0
+    DriverSetupLoadTypeName: iracing
+    DriverSetupPassedTech: 1
+    DriverIncidentCount: 2
+    DriverBrakeCurvingFactor: 1.8
+    Drivers:
+        - CarIdx: 0
+          UserName: Yauheni Chaburanau
+          AbbrevName:
+              Initials:
+                  UserID: 982139
+                  TeamID: 0
+                  TeamName: Yauheni Chaburanau
+                  CarNumber: 64
+                  CarNumberRaw: 64
+                  CarPath: astonmartin dbr9
+                  CarClassID: 0
+                  CarID: 64
+                  CarIsPaceCar: 0
+                  CarIsAI: 0
+                  CarIsElectric: 0
+                  CarScreenName: Aston Martin DBR9 GT1
+                  CarScreenNameShort: AM DBR9 GT1
+                  CarClassShortName:
+                      CarClassRelSpeed: 0
+                      CarClassLicenseLevel: 0
+                      CarClassMaxFuelPct: 1.000 %
+                      CarClassWeightPenalty: 0.000 kg
+                      CarClassPowerAdjust: 0.000 %
+                      CarClassDryTireSetLimit: 0 %
+                      CarClassColor: 16777215
+                      CarClassEstLapTime: 101.9185
+                      IRating: 1
+                      LicLevel: 1
+                      LicSubLevel: 1
+                      LicString: R 0.01
+                      LicColor: 0xundefined
+                      IsSpectator: 0
+                      CarDesignStr: 23,004225,004225,ffffff
+                      HelmetDesignStr: 28,ff9900,ff0068,000000
+                      SuitDesignStr: 0,000000,ffffff,878787
+                      BodyType: 1
+                      FaceType: 11
+                      HelmetType: 0
+                      CarNumberDesignStr: 0,0,ffffff,777777,000000
+                      CarSponsor_1: 0
+                      CarSponsor_2: 0
+                      CurDriverIncidentCount: 2
+                      TeamIncidentCount: 2
+SplitTimeInfo:
+    Sectors:
+        - SectorNum: 0
+          SectorStartPct: 0
+        - SectorNum: 1
+          SectorStartPct: 0.345492
+        - SectorNum: 2
+          SectorStartPct: 0.475864
+        - SectorNum: 3
+          SectorStartPct: 0.657524
+        - SectorNum: 4
+          SectorStartPct: 0.853068
+CarSetup:
+    UpdateCount: 1
+    Tires:
+        LeftFront:
+            StartingPressure: 124 kPa
+            LastHotPressure: 124 kPa
+            LastTempsOMI: 44C, 44C, 44C
+            TreadRemaining: 100%, 100%, 100%
+        LeftRear:
+            StartingPressure: 124 kPa
+            LastHotPressure: 124 kPa
+            LastTempsOMI: 44C, 44C, 44C
+            TreadRemaining: 100%, 100%, 100%
+        RightFront:
+            StartingPressure: 124 kPa
+            LastHotPressure: 124 kPa
+            LastTempsIMO: 44C, 44C, 44C
+            TreadRemaining: 100%, 100%, 100%
+        RightRear:
+            StartingPressure: 124 kPa
+            LastHotPressure: 124 kPa
+            LastTempsIMO: 44C, 44C, 44C
+            TreadRemaining: 100%, 100%, 100%
+    Chassis:
+        Front:
+            AntiRollBar: 4.5
+            ToeIn: -0.6 mm
+            FrontMasterCyl: 22.2 mm
+            RearMasterCyl: 22.2 mm
+            BrakePads: Low friction
+            BrakePressureBias: 50.6%
+            TractionControlSetting: 5
+        LeftFront:
+            CornerWeight: 2982 N
+            RideHeight: 60.4 mm
+            SpringPerchOffset: 75 mm
+            SpringRate: 175 N/mm
+            LsCompDamping: 10 clicks
+            HsCompDamping: 8 clicks
+            LsRbdDamping: 4 clicks
+            HsRbdDamping: 2 clicks
+            Camber: -3.8 deg
+            Caster: +10.0 deg
+        LeftRear:
+            CornerWeight: 3363 N
+            RideHeight: 60.2 mm
+            SpringPerchOffset: 71 mm
+            SpringRate: 175 N/mm
+            LsCompDamping: 4 clicks
+            HsCompDamping: 10 clicks
+            LsRbdDamping: 4 clicks
+            HsRbdDamping: 10 clicks
+            Camber: -3.0 deg
+        RightFront:
+            CornerWeight: 2924 N
+            RideHeight: 60.4 mm
+            SpringPerchOffset: 76 mm
+            SpringRate: 175 N/mm
+            LsCompDamping: 10 clicks
+            HsCompDamping: 8 clicks
+            LsRbdDamping: 4 clicks
+            HsRbdDamping: 2 clicks
+            Camber: -3.8 deg
+            Caster: +10.0 deg
+        RightRear:
+            CornerWeight: 3422 N
+            RideHeight: 60.2 mm
+            SpringPerchOffset: 70 mm
+            SpringRate: 175 N/mm
+            LsCompDamping: 4 clicks
+            HsCompDamping: 10 clicks
+            LsRbdDamping: 4 clicks
+            HsRbdDamping: 10 clicks
+            Camber: -3.0 deg
+        Rear:
+            FuelLevel: 70.0 L
+            AntiRollBar: 18
+            ToeIn: +0.3 mm
+            CrossWeight: 49.5%
+            WingSetting: Hole 4
+    Drivetrain:
+        Drivetrain:
+            DropGear: 1.389
+            FinalDrive: 2.167
+            FirstGear: 2.857, 114.5 Km/h
+            SecondGear: 2.063, 158.6 Km/h
+            ThirdGear: 1.579, 207.2 Km/h
+            FourthGear: 1.273, 256.9 Km/h
+            FifthGear: 1.095, 298.7 Km/h
+            SixthGear: 0.960, 340.7 Km/h
+        Diff:
+            ClutchPlates: 5
+            Preload: 54 Nm
+            DriveRampAngle: 85 deg
+            CoastRampAngle: 45 deg
