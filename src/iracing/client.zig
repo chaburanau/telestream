@@ -52,14 +52,22 @@ pub const Client = struct {
 
     pub fn init(
         allocator: mem.Allocator,
-        data_source: source.Source,
-        events_loop: events.EventLoop,
+        data_source_path: []const u8,
+        event_source_path: []const u8,
     ) !Client {
+        const data_source = try source.Source.fromMemory(data_source_path);
+        const event_source = try events.EventLoop.fromWindowsEventFile(event_source_path);
+
         return Client{
             .allocator = allocator,
             .source = data_source,
-            .events = events_loop,
+            .events = event_source,
         };
+    }
+
+    pub fn deinit(self: *Client) void {
+        self.source.deinit() catch {};
+        self.events.deinit() catch {};
     }
 
     pub fn run(self: *Client, updater: anytype) !void {
@@ -70,7 +78,6 @@ pub const Client = struct {
     }
 
     fn iteration(self: *Client, updater: anytype) !bool {
-        try self.events.wait(TIMEOUT);
         const header = try self.getHeader();
 
         var sessions = try self.getSession(header);
@@ -126,7 +133,7 @@ pub const Client = struct {
     }
 
     pub fn getValues(self: *Client, header: model.Header, variables: model.Variables) !model.Values {
-        const buffer = self.getLastTick(header);
+        const buffer = header.lastBuffer();
         const offset: usize = @intCast(buffer.offset);
         const lenght: usize = @intCast(header.buffers_length);
 
@@ -150,22 +157,7 @@ pub const Client = struct {
         };
     }
 
-    fn getLastTick(_: Client, header: model.Header) model.Buffer {
-        var ticks = [4]i32{
-            header.buffers[0].tick,
-            header.buffers[1].tick,
-            header.buffers[2].tick,
-            header.buffers[3].tick,
-        };
-
-        std.mem.sort(i32, &ticks, {}, std.sort.desc(i32));
-
-        for (0..4) |index| {
-            if (header.buffers[index].tick == ticks[1]) {
-                return header.buffers[index];
-            }
-        }
-
-        unreachable;
+    pub fn wait(self: *Client, timeout: u32) !void {
+        try self.events.wait(timeout);
     }
 };

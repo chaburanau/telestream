@@ -38,11 +38,11 @@ test "map header" {
     try testing.expectEqual(1, result.version);
     try testing.expectEqual(2, result.status);
     try testing.expectEqual(3, result.tick_rate);
-    try testing.expectEqual(4, result.session_info_version);
-    try testing.expectEqual(5, result.session_info_lenght);
-    try testing.expectEqual(6, result.session_info_offset);
-    try testing.expectEqual(7, result.n_vars);
-    try testing.expectEqual(8, result.header_offset);
-    try testing.expectEqual(9, result.n_buffers);
-    try testing.expectEqual(0, result.buffer_length);
+    try testing.expectEqual(4, result.session_version);
+    try testing.expectEqual(5, result.session_lenght);
+    try testing.expectEqual(6, result.session_offset);
+    try testing.expectEqual(7, result.number_of_variables);
+    try testing.expectEqual(8, result.variables_offset);
+    try testing.expectEqual(9, result.number_of_buffers);
+    try testing.expectEqual(0, result.buffers_length);
 }

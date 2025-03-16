@@ -3,7 +3,7 @@ const session = @import("session.zig");
 
 pub const Header = extern struct {
     version: i32,
-    status: i32,
+    state: State,
     tick_rate: i32,
     session_version: i32,
     session_lenght: i32,
@@ -14,6 +14,26 @@ pub const Header = extern struct {
     buffers_length: i32,
     padding: [2]u32,
     buffers: [4]Buffer,
+
+    pub fn lastBuffer(self: Header) Buffer {
+        const buffers = self.buffers;
+        var ticks = [4]i32{
+            buffers[0].tick,
+            buffers[1].tick,
+            buffers[2].tick,
+            buffers[3].tick,
+        };
+
+        std.mem.sort(i32, &ticks, {}, std.sort.desc(i32));
+
+        for (0..4) |index| {
+            if (ticks[1] == buffers[index].tick) {
+                return buffers[index];
+            }
+        }
+
+        unreachable;
+    }
 };
 
 pub const Buffer = extern struct {
@@ -189,17 +209,6 @@ pub const Values = struct {
     items: []Value,
 
     pub fn deinit(self: *Values, allocator: std.mem.Allocator) void {
-        // switch (self.items[index]) {
-        //     .chars => |cap| allocator.free(cap),
-        //     .bools => |cap| allocator.free(cap),
-        //     .ints => |cap| allocator.free(cap),
-        //     .bitfields => |cap| allocator.free(cap),
-        //     .floats => |cap| allocator.free(cap),
-        //     .doubles => |cap| allocator.free(cap),
-        //     .counts => |cap| allocator.free(cap),
-        //     else => {},
-        // }
-
         for (0..self.items.len) |index| self.items[index].deinit(allocator);
         allocator.free(self.items);
     }
@@ -375,7 +384,7 @@ pub const ReplayStateMode = enum(i16) {
     erase_tape = 0,
 };
 
-pub const SessionState = enum(i16) {
+pub const State = enum(i32) {
     invalid = 0,
     get_in_car = 1,
     warmup = 2,

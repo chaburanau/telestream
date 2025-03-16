@@ -23,6 +23,10 @@ pub const SessionInfo = struct {
         self.session_info.deinit(allocator);
     }
 
+    pub fn stringify(self: SessionInfo, writer: anytype) !void {
+        try self.session_info.stringify(writer);
+    }
+
     pub fn keys(self: SessionInfo) [][]const u8 {
         return self.session_info.docs.items[0].map.keys();
     }
