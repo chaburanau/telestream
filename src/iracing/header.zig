@@ -20,8 +20,8 @@ pub const Buffer = extern struct {
     offset: i32,
     padding: [2]u32,
 
-    pub fn less(_: void, left: Buffer, right: Buffer) bool {
-        return left.tick < right.tick;
+    pub fn more(_: void, left: Buffer, right: Buffer) bool {
+        return left.tick > right.tick;
     }
 };
 

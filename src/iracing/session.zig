@@ -3,12 +3,11 @@ const yaml = @import("yaml");
 
 pub const ParsingError = error{
     KeyNotFound,
-    IndexOutOfRange,
     InvalidType,
+    IndexOutOfRange,
 };
 
 pub const SessionInfo = struct {
-    allocator: std.mem.Allocator,
     session_info: yaml.Yaml,
 
     pub fn init(allocator: std.mem.Allocator, data: []const u8) !SessionInfo {
@@ -16,13 +15,12 @@ pub const SessionInfo = struct {
         try parser.load(allocator);
 
         return SessionInfo{
-            .allocator = allocator,
             .session_info = parser,
         };
     }
 
-    pub fn deinit(self: *SessionInfo) void {
-        self.session_info.deinit(self.allocator);
+    pub fn deinit(self: *SessionInfo, allocator: std.mem.Allocator) void {
+        self.session_info.deinit(allocator);
     }
 
     pub fn keys(self: SessionInfo) [][]const u8 {

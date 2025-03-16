@@ -1,7 +1,11 @@
 const std = @import("std");
 const headers = @import("header.zig");
 
-pub fn mapStruct(comptime T: type, data: []const u8) !T {
+const MapError = error{
+    UnsupportedType,
+};
+
+pub fn mapStruct(comptime T: type, data: []u8) !T {
     switch (T) {
         headers.Header => {},
         headers.ValueHeader => {},
@@ -9,6 +13,20 @@ pub fn mapStruct(comptime T: type, data: []const u8) !T {
     }
 
     return std.mem.bytesAsValue(T, data).*;
+}
+
+pub fn mapSlice(comptime T: type, allocator: std.mem.Allocator, data: []u8) ![]T {
+    const size: usize = @sizeOf(T);
+    const count: usize = @intCast(data.len / size);
+    const slice = try allocator.alloc(T, count);
+
+    for (0..count) |index| {
+        const chunk = data[index * size .. (index + 1) * size];
+        const value = try mapStruct(T, chunk);
+        slice[index] = value;
+    }
+
+    return slice;
 }
 
 pub fn mapArray(comptime T: type, array: *std.ArrayList(T), data: []const u8, count: usize) !void {

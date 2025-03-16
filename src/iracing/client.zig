@@ -1,15 +1,19 @@
 const std = @import("std");
+const mem = std.mem;
 const heap = std.heap;
 const http = std.http;
-const win = std.os.windows;
-const windows_mem = @import("../windows/memory.zig");
-const headers = @import("header.zig");
+
+const model = @import("model.zig");
+const source = @import("source.zig");
+const mapper = @import("mapper.zig");
+const events = @import("event.zig");
+const session = @import("session.zig");
 
 const SimError = error{
     SimNotRunning,
 };
 
-pub fn isRunning(allocator: std.mem.Allocator, url: []const u8) !bool {
+pub fn isRunning(allocator: mem.Allocator, url: []const u8) !bool {
     var client = http.Client{ .allocator = allocator };
     defer client.deinit();
 
@@ -27,76 +31,132 @@ pub fn isRunning(allocator: std.mem.Allocator, url: []const u8) !bool {
 
     const body = try request.read(body_data);
 
-    return std.mem.indexOf(u8, body, "running:1") != null;
+    return mem.indexOf(u8, body, "running:1") != null;
 }
 
+const SIZE_HEADER = @sizeOf(model.Header);
+const SIZE_VARIABLE = @sizeOf(model.Variable);
+const TIMEOUT: u32 = 10000;
+
 pub const Client = struct {
-    allocator: std.mem.Allocator,
-    location: *anyopaque,
-    handle: win.HANDLE,
-    events: win.HANDLE,
+    allocator: mem.Allocator,
 
-    pub fn init(allocator: std.mem.Allocator, telemetry_file: []const u8, event_file: []const u8) !Client {
-        const handle_name = try win.sliceToPrefixedFileW(null, telemetry_file);
-        const handle = try windows_mem.openFileMappingW(windows_mem.FILE_MAP_READ, 0, handle_name.span().ptr);
-        const location = try windows_mem.mapViewOfFile(handle, windows_mem.FILE_MAP_READ, 0, 0, 0);
-        const events = try win.CreateEventEx(null, event_file, win.CREATE_EVENT_MANUAL_RESET, windows_mem.FILE_MAP_READ);
+    source: source.Source,
+    events: events.EventLoop,
 
-        const client = Client{
+    header_data: [SIZE_HEADER]u8,
+
+    pub fn init(
+        allocator: mem.Allocator,
+        data_source: source.Source,
+        events_loop: events.EventLoop,
+    ) !Client {
+        return Client{
             .allocator = allocator,
-            .location = location,
-            .handle = handle,
-            .events = events,
+            .source = data_source,
+            .events = events_loop,
+            .header_data = undefined,
         };
-
-        return client;
     }
 
-    pub fn deinit(self: Client) !void {
-        windows_mem.unmapViewOfFile(self.location);
-        win.CloseHandle(self.handle);
-        win.CloseHandle(self.events);
+    pub fn run(self: *Client, updater: anytype) !void {
+        while (true) {
+            const close = try self.iteration(updater);
+            if (close) return;
+        }
     }
 
-    pub fn read(self: Client, from: usize, buffer: []u8) void {
-        const memory = @as([*]u8, @ptrCast(@alignCast(self.location)))[from .. from + buffer.len];
-        @memcpy(buffer, memory);
+    fn iteration(self: *Client, updater: anytype) !bool {
+        try self.events.wait(TIMEOUT);
+        const header = try self.getHeader();
+
+        var sessions = try self.getSession(header);
+        defer sessions.deinit(self.allocator);
+
+        var variables = try self.getVariables(header);
+        defer variables.deinit(self.allocator);
+
+        var values = try self.getValues(header, variables);
+        defer values.deinit(self.allocator);
+
+        return try updater.update(
+            header,
+            sessions,
+            variables,
+            values,
+        );
     }
 
-    pub fn readHeader(self: Client) !headers.Header {
-        const size = @sizeOf(headers.Header);
-        const data = try self.allocator.alloc(u8, size);
+    pub fn getHeader(self: *Client) !model.Header {
+        try self.source.read(0, &self.header_data);
+        return try mapper.mapStruct(model.Header, &self.header_data);
+    }
+
+    pub fn getSession(self: *Client, header: model.Header) !model.Session {
+        const offset: usize = @intCast(header.session_offset);
+        const lenght: usize = @intCast(header.session_lenght);
+        const data = try self.allocator.alloc(u8, lenght);
         defer self.allocator.free(data);
-        self.read(0, data);
+        try self.source.read(offset, data);
 
-        return std.mem.bytesAsValue(headers.Header, data).*;
+        return model.Session{
+            .version = header.session_version,
+            .info = try session.SessionInfo.init(self.allocator, data),
+        };
     }
 
-    pub fn readSessionDetails(self: Client, header: headers.Header) ![]u8 {
-        const from: usize = @intCast(header.session_info_offset);
-        const data = try self.allocator.alloc(u8, header.session_info_lenght);
-        self.read(from, data);
-
-        return data;
-    }
-
-    pub fn readValueHeaders(self: Client, header: headers.Header, allocator: std.mem.Allocator) !headers.ValueHeaders {
-        const n_vars: usize = @intCast(header.n_vars);
-        const size: usize = @sizeOf(headers.ValueHeader);
-        const from: usize = @intCast(header.header_offset);
-
-        const data = try self.allocator.alloc(u8, size * n_vars);
+    pub fn getVariables(self: *Client, header: model.Header) !model.Variables {
+        const offset: usize = @intCast(header.variables_offset);
+        const lenght: usize = @intCast(header.number_of_variables * SIZE_VARIABLE);
+        const data = try self.allocator.alloc(u8, lenght);
         defer self.allocator.free(data);
-        self.read(from, data);
+        try self.source.read(offset, data);
 
-        var values = try headers.ValueHeaders.initCapacity(allocator, n_vars);
+        return model.Variables{
+            .items = try mapper.mapSlice(model.Variable, self.allocator, data),
+        };
+    }
 
-        for (0..n_vars) |index| {
-            const chunk = data[index * size .. (index + 1) * size];
-            const value: headers.ValueHeader = std.mem.bytesAsValue(headers.ValueHeader, chunk).*;
-            try values.append(value);
+    pub fn getValues(self: *Client, header: model.Header, variables: model.Variables) !model.Values {
+        const buffer = self.getLastTick(header);
+        const offset: usize = @intCast(buffer.offset);
+        const lenght: usize = @intCast(header.buffers_length);
+        const data = try self.allocator.alloc(u8, lenght);
+        defer self.allocator.free(data);
+        try self.source.read(offset, data);
+
+        const values = try self.allocator.alloc(model.Value, variables.items.len);
+
+        for (0..variables.items.len) |index| {
+            const current_offset: usize = @intCast(variables.items[index].offset);
+            const current_lenght: usize = @intCast(variables.items[index].size());
+
+            const chunk = data[current_offset .. current_offset + current_lenght];
+            values[index] = try model.Value.init(self.allocator, variables.items[index], chunk);
         }
 
-        return values;
+        return model.Values{
+            .buffer = buffer,
+            .items = values,
+        };
+    }
+
+    fn getLastTick(_: Client, header: model.Header) model.Buffer {
+        var ticks = [4]i32{
+            header.buffers[0].tick,
+            header.buffers[1].tick,
+            header.buffers[2].tick,
+            header.buffers[3].tick,
+        };
+
+        std.mem.sort(i32, &ticks, {}, std.sort.desc(i32));
+
+        for (0..4) |index| {
+            if (header.buffers[index].tick == ticks[1]) {
+                return header.buffers[index];
+            }
+        }
+
+        unreachable;
     }
 };
