@@ -3,7 +3,7 @@ const session = @import("session.zig");
 
 pub const Header = extern struct {
     version: i32,
-    state: State,
+    state: i32,
     tick_rate: i32,
     session_version: i32,
     session_lenght: i32,
@@ -201,6 +201,16 @@ pub const Variables = struct {
 
     pub fn deinit(self: *Variables, allocator: std.mem.Allocator) void {
         allocator.free(self.items);
+    }
+
+    pub fn find(self: Variables, name: []const u8) ?usize {
+        for (0..self.items.len) |index| {
+            if (std.mem.eql(u8, name, self.items[index].name[0..name.len])) {
+                return index;
+            }
+        }
+
+        return null;
     }
 };
 
