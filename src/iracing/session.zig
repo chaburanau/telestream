@@ -8,15 +8,21 @@ pub const ParsingError = error{
 };
 
 pub const SessionInfo = struct {
+    allocator: std.mem.Allocator,
     session_info: yaml.Yaml,
 
     pub fn init(allocator: std.mem.Allocator, data: []const u8) !SessionInfo {
-        const session_info = try yaml.Yaml.load(allocator, data);
-        return SessionInfo{ .session_info = session_info };
+        var parser = yaml.Yaml{ .source = data };
+        try parser.load(allocator);
+
+        return SessionInfo{
+            .allocator = allocator,
+            .session_info = parser,
+        };
     }
 
     pub fn deinit(self: *SessionInfo) void {
-        self.session_info.deinit();
+        self.session_info.deinit(self.allocator);
     }
 
     pub fn keys(self: SessionInfo) [][]const u8 {

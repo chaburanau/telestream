@@ -12,25 +12,25 @@ const IRacingTelemetryFileName = "Local\\IRSDKMemMapFileName";
 const IRacingDataEventFileName = "Local\\IRSDKDataValidEvent";
 
 pub fn main() !void {
-    var renderer = overlay.Renderer.init();
-    defer renderer.stop();
-    try renderer.start();
+    // var renderer = overlay.Renderer.init();
+    // defer renderer.stop();
+    // try renderer.start();
 
-    // var gpa = std.heap.GeneralPurposeAllocator(.{}){};
-    // defer std.debug.assert(gpa.deinit() == .ok);
-    //
-    // const allocator = gpa.allocator();
-    //
-    // const src = try source.Source.fromMemory(IRacingTelemetryFileName);
-    // defer src.deinit() catch {};
-    // const loop = try events.EventLoop.fromWindowsEventFile(IRacingDataEventFileName);
-    // defer loop.deinit() catch {};
-    // var ctrl = try controller.Controller.init(allocator, src, loop);
-    // defer ctrl.deinit();
-    //
-    // var updater = Updater{ .allocator = allocator };
-    // updater.count = 0;
-    // try ctrl.run(&updater);
+    var gpa = std.heap.GeneralPurposeAllocator(.{}){};
+    defer std.debug.assert(gpa.deinit() == .ok);
+
+    const allocator = gpa.allocator();
+
+    const src = try source.Source.fromMemory(IRacingTelemetryFileName);
+    defer src.deinit() catch {};
+    const loop = try events.EventLoop.fromWindowsEventFile(IRacingDataEventFileName);
+    defer loop.deinit() catch {};
+    var ctrl = try controller.Controller.init(allocator, src, loop);
+    defer ctrl.deinit();
+
+    var updater = Updater{ .allocator = allocator };
+    updater.count = 0;
+    try ctrl.run(&updater);
 }
 
 const Updater = struct {
@@ -63,8 +63,6 @@ const Updater = struct {
             });
 
             if (vars.items[index].offset == 207) {
-                const data = try self.allocator.alloc(u8, 256);
-                defer self.allocator.free(data);
                 const idx = try vals.items[index].parse([]i32);
                 std.debug.print("IDs: {any}\n", .{idx});
             }
@@ -77,6 +75,7 @@ const Updater = struct {
 pub const std_options = std.Options{
     .log_scope_levels = &[_]std.log.ScopeLevel{
         .{ .scope = .parse, .level = .err },
+        .{ .scope = .parser, .level = .err },
         .{ .scope = .tokenizer, .level = .err },
     },
 };
