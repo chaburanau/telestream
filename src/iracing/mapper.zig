@@ -1,5 +1,5 @@
 const std = @import("std");
-const headers = @import("header.zig");
+const model = @import("model.zig");
 
 const MapError = error{
     UnsupportedType,
@@ -7,8 +7,8 @@ const MapError = error{
 
 pub fn mapStruct(comptime T: type, data: []u8) !T {
     switch (T) {
-        headers.Header => {},
-        headers.ValueHeader => {},
+        model.Header => {},
+        model.Variable => {},
         else => {},
     }
 
@@ -29,21 +29,11 @@ pub fn mapSlice(comptime T: type, allocator: std.mem.Allocator, data: []u8) ![]T
     return slice;
 }
 
-pub fn mapArray(comptime T: type, array: *std.ArrayList(T), data: []const u8, count: usize) !void {
-    const size = @sizeOf(T);
-
-    for (0..count) |index| {
-        const chunk = data[index * size .. (index + 1) * size];
-        const value = try mapStruct(T, chunk);
-        array.items[index] = value;
-    }
-}
-
 test "map header" {
     const testing = std.testing;
 
     const data = [_]u8{ 0, 0, 0, 1 };
-    const result = try mapStruct(headers.Header, &data);
+    const result = try mapStruct(model.Header, &data);
 
     try testing.expectEqual(1, result.version);
     try testing.expectEqual(2, result.status);

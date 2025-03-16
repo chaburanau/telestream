@@ -9,6 +9,7 @@ const mapper = @import("mapper.zig");
 const events = @import("event.zig");
 const session = @import("session.zig");
 
+const SIM_STATUS_PATH = "/get_sim_status?object=simStatus";
 const SimError = error{
     SimNotRunning,
 };
@@ -17,10 +18,16 @@ pub fn isRunning(allocator: mem.Allocator, url: []const u8) !bool {
     var client = http.Client{ .allocator = allocator };
     defer client.deinit();
 
-    const endpoint = url ++ "/get_sim_status?object=simStatus";
+    const endpoint = try std.mem.concat(allocator, u8, &[_][]const u8{ url, SIM_STATUS_PATH });
+    defer allocator.free(endpoint);
+
+    const headers_data = try allocator.alloc(u8, 128);
+    defer allocator.free(headers_data);
+
+    const body_data = try allocator.alloc(u8, 256);
+    defer allocator.free(body_data);
+
     const uri = try std.Uri.parse(endpoint);
-    const headers_data: [64]u8 = undefined;
-    const body_data: [256]u8 = undefined;
 
     var request = try client.open(.GET, uri, .{ .server_header_buffer = headers_data });
     defer request.deinit();
@@ -28,10 +35,10 @@ pub fn isRunning(allocator: mem.Allocator, url: []const u8) !bool {
     try request.send();
     try request.finish();
     try request.wait();
+    _ = try request.read(body_data);
+    const running = mem.indexOf(u8, body_data, "running:1") != null;
 
-    const body = try request.read(body_data);
-
-    return mem.indexOf(u8, body, "running:1") != null;
+    return running;
 }
 
 const SIZE_HEADER = @sizeOf(model.Header);
@@ -40,11 +47,8 @@ const TIMEOUT: u32 = 10000;
 
 pub const Client = struct {
     allocator: mem.Allocator,
-
     source: source.Source,
     events: events.EventLoop,
-
-    header_data: [SIZE_HEADER]u8,
 
     pub fn init(
         allocator: mem.Allocator,
@@ -55,7 +59,6 @@ pub const Client = struct {
             .allocator = allocator,
             .source = data_source,
             .events = events_loop,
-            .header_data = undefined,
         };
     }
 
@@ -88,13 +91,17 @@ pub const Client = struct {
     }
 
     pub fn getHeader(self: *Client) !model.Header {
-        try self.source.read(0, &self.header_data);
-        return try mapper.mapStruct(model.Header, &self.header_data);
+        const data = try self.allocator.alloc(u8, SIZE_HEADER);
+        defer self.allocator.free(data);
+        try self.source.read(0, data);
+
+        return try mapper.mapStruct(model.Header, data);
     }
 
     pub fn getSession(self: *Client, header: model.Header) !model.Session {
         const offset: usize = @intCast(header.session_offset);
         const lenght: usize = @intCast(header.session_lenght);
+
         const data = try self.allocator.alloc(u8, lenght);
         defer self.allocator.free(data);
         try self.source.read(offset, data);
@@ -108,6 +115,7 @@ pub const Client = struct {
     pub fn getVariables(self: *Client, header: model.Header) !model.Variables {
         const offset: usize = @intCast(header.variables_offset);
         const lenght: usize = @intCast(header.number_of_variables * SIZE_VARIABLE);
+
         const data = try self.allocator.alloc(u8, lenght);
         defer self.allocator.free(data);
         try self.source.read(offset, data);
@@ -121,6 +129,7 @@ pub const Client = struct {
         const buffer = self.getLastTick(header);
         const offset: usize = @intCast(buffer.offset);
         const lenght: usize = @intCast(header.buffers_length);
+
         const data = try self.allocator.alloc(u8, lenght);
         defer self.allocator.free(data);
         try self.source.read(offset, data);
