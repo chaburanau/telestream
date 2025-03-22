@@ -16,3 +16,8 @@ pub const Size = struct {
     w: f32,
     h: f32,
 };
+
+pub const Rectangle = struct {
+    size: Size,
+    position: Position,
+};

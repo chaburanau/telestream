@@ -2,7 +2,7 @@ const std = @import("std");
 
 const model = @import("iracing/model.zig");
 const iracing = @import("iracing/client.zig");
-const overlay = @import("overlay/entry.zig");
+const overlay = @import("overlay/renderer.zig");
 
 const IRacingAPIURL = "http://127.0.0.1:32034";
 const IRacingTelemetryFileName = "Local\\IRSDKMemMapFileName";
@@ -21,9 +21,9 @@ pub fn main() !void {
         try debugIRacing(allocator, &client);
     }
 
-    // var renderer = overlay.Renderer.init();
-    // defer renderer.stop();
-    // try renderer.start();
+    var renderer = overlay.Renderer.init();
+    defer renderer.stop();
+    try renderer.start();
 }
 
 pub fn debugIRacing(allocator: std.mem.Allocator, client: *iracing.Client) !void {

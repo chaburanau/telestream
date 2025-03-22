@@ -1,6 +1,7 @@
 const std = @import("std");
 const model = @import("model.zig");
 const drawer = @import("drawer.zig");
+const colors = @import("colors.zig");
 const errors = @import("errors.zig");
 const windows_ui = @import("../windows/ui.zig");
 
@@ -99,18 +100,6 @@ pub const Renderer = struct {
             }
 
             try self.reset();
-
-            try self.drawer.?.drawRectange(
-                model.Position{ .x = 100, .y = 100 },
-                model.Size{ .w = 100, .h = 100 },
-                model.Color{ .r = 0, .g = 0, .b = 0, .a = 0xFF },
-            );
-            try self.drawer.?.drawText(
-                "Testing",
-                model.Position{ .x = 101, .y = 101 },
-                model.Color{ .r = 0xFF, .g = 0xFF, .b = 0xFF, .a = 0xFF },
-            );
-
             try self.render();
         }
     }
