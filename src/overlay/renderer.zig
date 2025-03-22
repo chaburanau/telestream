@@ -5,6 +5,8 @@ const colors = @import("colors.zig");
 const errors = @import("errors.zig");
 const windows_ui = @import("../windows/ui.zig");
 
+const component_input = @import("component_input.zig");
+
 const c = @cImport({
     @cDefine("SDL_DISABLE_OLD_NAMES", {});
     @cDefine("SDL_MAIN_HANDLED", {});
@@ -99,7 +101,23 @@ pub const Renderer = struct {
                 if (exit) return;
             }
 
+            const input = component_input.ComponentInput{
+                .scale = 1.0,
+                .size = model.Size{
+                    .h = 100,
+                    .w = 40,
+                },
+                .position = model.Position{
+                    .x = 500,
+                    .y = 500,
+                },
+                .clutch = 0.4,
+                .brake = 0.5,
+                .throttle = 0.6,
+            };
+
             try self.reset();
+            try input.render(&self.drawer.?);
             try self.render();
         }
     }

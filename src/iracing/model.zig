@@ -212,6 +212,33 @@ pub const Variables = struct {
 
         return null;
     }
+
+    pub fn value(self: Variables, values: Variables, name: []const u8) !Value {
+        const index = self.find(name).?;
+        return values.items[index];
+    }
+
+    pub fn steering(self: Variables, values: Values) !f32 {
+        return try self.value(values, "SteeringWheelAngle").float;
+    }
+    pub fn clutch(self: Variables, values: Values) !f32 {
+        return try self.value(values, "Clutch").float;
+    }
+    pub fn brake(self: Variables, values: Values) !f32 {
+        return try self.value(values, "Brake").float;
+    }
+    pub fn throttle(self: Variables, values: Values) !f32 {
+        return try self.value(values, "Throttle").float;
+    }
+    pub fn gear(self: Variables, values: Values) !f32 {
+        return try self.value(values, "Gear").float;
+    }
+    pub fn rpm(self: Variables, values: Values) !f32 {
+        return try self.value(values, "RPM").float;
+    }
+    pub fn speed(self: Variables, values: Values) !f32 {
+        return try self.value(values, "Speed").float;
+    }
 };
 
 pub const Values = struct {

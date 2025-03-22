@@ -9,12 +9,20 @@ const mapper = @import("mapper.zig");
 const events = @import("event.zig");
 const session = @import("session.zig");
 
-const SIM_STATUS_PATH = "/get_sim_status?object=simStatus";
+pub const SimulatorData = struct {
+    header: model.Header,
+    session: model.Session,
+    variables: model.Variables,
+    values: model.Values,
+};
+
 const SimError = error{
     SimNotRunning,
 };
 
 pub fn isRunning(allocator: mem.Allocator, url: []const u8) !bool {
+    const SIM_STATUS_PATH = "/get_sim_status?object=simStatus";
+
     var client = http.Client{ .allocator = allocator };
     defer client.deinit();
 
